@@ -4,7 +4,7 @@ contains all the symbols, constants
 directions, etc
 
 '''
-
+import numpy as np
 # ch repr of objects
 _ground = u"\u2588"
 
@@ -12,12 +12,27 @@ _sky = u"\u2588"
 
 _bricks = u"\u2588"
 
-_mario = " \n '\
-─▄████▄▄░ \n '\
-▄▀█▀▐└─┐░░ \n '\
-█▄▐▌▄█▄┘██ \n  '\
-└▄▄▄▄▄┘███  \n '\
-██▒█▒███▀ "
+_mario1= "\
+             \n \
+─▄████▄▄░  \n \
+▄▀█▀▐└─┐░░ \n \
+█▄▐▌▄█▄┘██ \n  \
+└▄▄▄▄▄┘███\n \
+██▒█▒███▀  \
+"
+mari = np.chararray((7,137))
+mari[:,:] = "+"
+#6*13 size mario
+
+_mario  = np.chararray((3,3))
+_mario [:,:]= " "
+_mario[0,1]="@"
+_mario[1,0]="/"
+_mario[1,1]="|"
+_mario[1,2]="\\"
+_mario[2,0]=_mario[1,0]
+_mario[2,2]=_mario[1,2]
+
 
 _e1 = "E"
 _e2 = "M"
@@ -33,22 +48,21 @@ types = {
 
     _ground : "Ground",
 
-    _sky : "Sky"
+    _sky : "Sky",
     
-    _bricks : "Bricks",
+    
+    #_mario : "Mario",
 
-    _mario : "Mario",
+   # _e1 : "Mushrooms",
 
-    _e1 : "Mushrooms",
+    #_e2 : "Turtles",
 
-    _e2 : "Turtles",
-
-    _e3 : "DarthVader",
+    #_e3 : "DarthVader"
 }
 # scores
 scores = {
     _bricks : 20,
-    _enemy : 100
+    _e1: 100
 }
 # number of properties per level (0 is debug)
 enemies = [0, 2, 3, 4]

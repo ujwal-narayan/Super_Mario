@@ -1,6 +1,8 @@
 
 
 import numpy as np 
+import os
+import config
 
 class Board:
     """ Its the board and scene gen classs """
@@ -36,16 +38,27 @@ class Board:
     def init_board(self, reset=False):
         """ Intialize the board and set it up """
         if reset:
-            self.framecounter = 0
-
+          self.framecounter = 0
         # assigning the ground
         self._bufferboard[-3:, :] = "-"#config._ground
-        # assigning the sky
+        # assigning the sky       
+        self._bufferboard[:3, :] = "+" #config._sky
+        #assigning mario 
         
-        self._bufferboard[:3, :] = "-" #config._sky
-    def printer(self):
-        for row in range(self.height):
-            for col in range(self.width):
+        _mario  = np.chararray((3,3))
+        _mario [:,:]= " "
+        _mario[0,1]="@"
+        _mario[1,0]="/"
+        _mario[1,1]="|"
+        _mario[1,2]="\\"
+        _mario[2,0]=_mario[1,0]
+        _mario[2,2]=_mario[1,2]
+
+        self._bufferboard[-6:-3,:3]= _mario
+
+    def printer(self,screenview_height_start , screenview_height_end,screenview_width_start , screenview_width_end):
+        for row in range(screenview_height_start,screenview_height_end):
+            for col in range(screenview_width_start,screenview_width_end):
                 print(getcc(self._bufferboard[row,col]),end="")
             print("")
            
@@ -56,6 +69,35 @@ def getcc (ch):
         return " "
     if ch == b'-':
         return "-"
+    if ch == b'+':
+        return "#"
+    if ch == b'M':
+        return "M"
+    if ch == b'\\':
+        return "\\"
+    if ch == b'/':
+        return "/"
+    if ch == b'@':
+        return "@"
+    if ch == b'|':
+        return "|"
+    
 
-b=Board(30,190,0)
-b.printer()
+_mario1= "\
+             \n \
+─▄████▄▄░  \n \
+▄▀█▀▐└─┐░░ \n \
+█▄▐▌▄█▄┘██ \n  \
+└▄▄▄▄▄┘███\n \
+██▒█▒███▀  \n\
+"
+
+b=Board(20,390,0)
+b.printer(0,20,0,190)
+def prinstar() :
+    for row in range(1):
+        for col in range(6):
+            print((y[row,col]),end="")
+        print("\n")
+
+
