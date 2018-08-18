@@ -3,7 +3,9 @@
 import numpy as np 
 import os
 import config
+from colorama import init,Fore
 
+init(autoreset=True)
 class Board:
     """ Its the board and scene gen classs """
 
@@ -40,10 +42,11 @@ class Board:
         if reset:
           self.framecounter = 0
         # assigning the ground
-        self._bufferboard[-3:, :] = "-"#config._ground
+        self._bufferboard[-3:,:] = "g"#config._ground
         # assigning the sky       
-        self._bufferboard[:3, :] = "+" #config._sky
+        self._bufferboard[:10, :] = "s" #config._sky
         #assigning mario 
+        #put it in config and import later 
         
         _mario  = np.chararray((3,3))
         _mario [:,:]= " "
@@ -63,6 +66,7 @@ class Board:
             print("")
            
 #helper functions switch to another file later 
+#put it in config and import later  
 
 def getcc (ch):
     if ch == "" :
@@ -81,6 +85,10 @@ def getcc (ch):
         return "@"
     if ch == b'|':
         return "|"
+    if ch ==b"g":
+        return Fore.GREEN + "-"
+    if ch ==b"s":
+        return Fore.BLUE + " "
     
 
 _mario1= "\
@@ -94,10 +102,3 @@ _mario1= "\
 
 b=Board(20,390,0)
 b.printer(0,20,0,190)
-def prinstar() :
-    for row in range(1):
-        for col in range(6):
-            print((y[row,col]),end="")
-        print("\n")
-
-
