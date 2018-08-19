@@ -48,16 +48,9 @@ class Board:
         #assigning mario 
         #put it in config and import later 
         
-        _mario  = np.chararray((3,3))
-        _mario [:,:]= " "
-        _mario[0,1]="@"
-        _mario[1,0]="/"
-        _mario[1,1]="|"
-        _mario[1,2]="\\"
-        _mario[2,0]=_mario[1,0]
-        _mario[2,2]=_mario[1,2]
+        
 
-        self._bufferboard[-6:-3,:3]= _mario
+        #self._bufferboard[-6:-3,:3]= _mario
 
     def printer(self,screenview_height_start , screenview_height_end,screenview_width_start , screenview_width_end):
         for row in range(screenview_height_start,screenview_height_end):
@@ -86,7 +79,7 @@ def getcc (ch):
     if ch == b'|':
         return "|"
     if ch ==b"g":
-        return Fore.GREEN + "-"
+        return Fore.GREEN +     "-"
     if ch ==b"s":
         return Fore.BLUE + " "
     

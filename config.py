@@ -51,7 +51,7 @@ types = {
     _sky : "Sky",
     
     
-    #_mario : "Mario",
+    #   _mario : "Mario",
 
    # _e1 : "Mushrooms",
 
@@ -104,7 +104,7 @@ _allowed_inputs = {
     BOMB    : ['b'],           \
     QUIT    : ['q']
 }
-
+'''
 def get_key(key):
     for x in _allowed_inputs:
         if key in _allowed_inputs[x]:
@@ -180,7 +180,7 @@ def get_input(timeout=1):
         pass
     signal.signal(signal.SIGALRM, signal.SIG_IGN)
     return ''
-
+'''
 # for printing colored people
 colors = {
     'Black'            : '\x1b[0;30m',
