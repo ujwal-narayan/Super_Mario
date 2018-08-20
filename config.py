@@ -5,25 +5,19 @@ directions, etc
 
 '''
 import numpy as np
+
 # ch repr of objects
 _ground = u"\u2588"
 
 _sky = u"\u2588"
 
 _bricks = u"\u2588"
-
-_mario1= "\
-             \n \
-─▄████▄▄░  \n \
-▄▀█▀▐└─┐░░ \n \
-█▄▐▌▄█▄┘██ \n  \
-└▄▄▄▄▄┘███\n \
-██▒█▒███▀  \
-"
+'''
+_
 mari = np.chararray((7,137))
 mari[:,:] = "+"
 #6*13 size mario
-
+'''
 _mario  = np.chararray((3,3))
 _mario [:,:]= " "
 _mario[0,1]="@"
@@ -82,135 +76,11 @@ x_fac, y_fac = (4, 2)
 
 
 '''
-    Allow certain inputs and translate to easier to read format
-    UP : 0
-    DOWN : 1
-    LEFT : 2
-    RIGHT : 3
-    BOMB : 4
-'''
-
-# key presses
-UP, DOWN, LEFT, RIGHT, BOMB, QUIT = range(6)
-DIR = [UP, DOWN, LEFT, RIGHT]
-INVALID = -1
-
-# allowed inputs
-_allowed_inputs = {
-    UP      : ['w', '\x1b[A'], \
-    DOWN    : ['s', '\x1b[B'], \
-    LEFT    : ['a', '\x1b[D'], \
-    RIGHT   : ['d', '\x1b[C'], \
-    BOMB    : ['b'],           \
-    QUIT    : ['q']
-}
-'''
-def get_key(key):
-    for x in _allowed_inputs:
-        if key in _allowed_inputs[x]:
-            return x
-    return INVALID
-
-# Gets a single character from standard input.  Does not echo to the screen.
-class _Getch:
-
-    def __init__(self):
-        try:
-            self.impl = _GetchWindows()
-        except ImportError:
-            self.impl = _GetchUnix()
-
-
-    def __call__(self):
-        return self.impl()
-
-
-class _GetchUnix:
-
-
-    def __init__(self):
-        import tty, sys
-
-
-    def __call__(self):
-        import sys
-        import tty
-        import termios
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
-
-
-class _GetchWindows:
-
-    def __init__(self):
-        import msvcrt
-
-
-    def __call__(self):
-        import msvcrt
-        return msvcrt.getch()
-
-
-_getch = _Getch()
-
-
-class AlarmException(Exception):
-    pass
-
-
-def alarmHandler(signum, frame):
-    raise AlarmException
-
-
-def get_input(timeout=1):
-    import signal
-    signal.signal(signal.SIGALRM, alarmHandler)
-    signal.alarm(timeout)
-    try:
-        text = _getch()
-        signal.alarm(0)
-        return text
-    except AlarmException:
-        pass
-    signal.signal(signal.SIGALRM, signal.SIG_IGN)
-    return ''
-'''
-# for printing colored people
-colors = {
-    'Black'            : '\x1b[0;30m',
-    'Blue'             : '\x1b[0;34m',
-    'Green'            : '\x1b[0;32m',
-    'Cyan'             : '\x1b[0;36m',
-    'Red'              : '\x1b[0;31m',
-    'Purple'           : '\x1b[0;35m',
-    'Brown'            : '\x1b[0;33m',
-    'Gray'             : '\x1b[0;37m',
-    'Dark Gray'        : '\x1b[1;30m',
-    'Light Blue'       : '\x1b[1;34m',
-    'Light Green'      : '\x1b[1;32m',
-    'Light Cyan'       : '\x1b[1;36m',
-    'Light Red'        : '\x1b[1;31m',
-    'Light Purple'     : '\x1b[1;35m',
-    'Yellow'           : '\x1b[1;33m',
-    'White'            : '\x1b[1;37m'
-}
-
-ENDC = '\x1b[0m'
-
-
 def getcc(ch):
 
     try:
         if ch == _empty:
             return ch
-        elif ch == _wall:
-            color = 'Dark Gray'
         elif ch == _bomb_man:
             color = 'Blue'
         elif ch == _enemy:
@@ -237,3 +107,27 @@ def printcc(st, color):
         return st
 
 print(_mario)
+'''
+ground_coods_x=None
+ground_coods_ex=None
+ground_coods_y=None
+ground_coods_ey=None
+
+
+#pipes 
+_pipes = np.chararray((4,6))
+_pipes [:,:] = " "
+_pipes[1:,1:2] = 'p'
+_pipes[1:,4:5] = 'p'
+_pipes[0,0]='_'
+_pipes[0,5]='_'
+_pipes[1,1] = 'p'
+_pipes[1,4] = 'p'
+
+#brickwalls 
+
+_brickwalls = np.chararray((3,50))
+_brickwalls[:,:] = "bT"
+
+
+

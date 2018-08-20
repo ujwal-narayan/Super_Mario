@@ -1,6 +1,7 @@
 from input import Get , input_to
 import os 
 import sys 
+import time
 from board import Board
 from charec import Mario
 
@@ -21,3 +22,4 @@ while True :
     if input == 'q' :
         os.system('clear')
         sys.exit()
+    time.sleep(0.2)

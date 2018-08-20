@@ -78,7 +78,7 @@ class Mario(characters) :
         self._y += self.speed
         self._endy += self.speed
         board._bufferboard[ox:oendx,oy:oendy] = ""
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct 
      
     def move(self,ch , board ):
         if ch == 'w' :
@@ -117,7 +117,7 @@ class Turtles(characters):
 
 class DarthVader(characters):
     """I AM THE SENATE < the big bad boss himself """
-    def __init__(self, x, y,ex,eylives = 2):
+    def __init__(self, x, y,ex,ey,lives = 2):
         super(DarthVader , self).__init__(x,y,ex,ey)
         self.damage = 10
         self.lives = 2 

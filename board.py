@@ -45,6 +45,7 @@ class Board:
         self._bufferboard[-3:,:] = "g"#config._ground
         # assigning the sky       
         self._bufferboard[:10, :] = "s" #config._sky
+
         #assigning mario 
         #put it in config and import later 
         
@@ -64,25 +65,31 @@ class Board:
 def getcc (ch):
     if ch == "" :
         return " "
-    if ch == b'-':
+    elif ch == b'-':
         return "-"
-    if ch == b'+':
+    elif ch == b'+':
         return "#"
-    if ch == b'M':
+    elif ch == b'M':
         return "M"
-    if ch == b'\\':
+    elif ch == b'\\':
         return "\\"
-    if ch == b'/':
+    elif ch == b'/':
         return "/"
-    if ch == b'@':
+    elif ch == b'@':
         return "@"
-    if ch == b'|':
+    elif ch == b'|':
         return "|"
-    if ch ==b"g":
+    elif ch ==b"g":
         return Fore.GREEN +     "-"
-    if ch ==b"s":
+    elif ch ==b"s":
         return Fore.BLUE + " "
-    
+    elif ch == b"_":
+        return Fore.LIGHTGREEN_EX + "_"
+    elif ch == b"b  ":
+        return Fore.LIGHTRED_EX + "T"
+    elif ch == b"p":
+        return Fore.LIGHTGREEN_EX + "|"
+   
 
 _mario1= "\
              \n \
@@ -93,5 +100,19 @@ _mario1= "\
 ██▒█▒███▀  \n\
 "
 
-b=Board(20,390,0)
-b.printer(0,20,0,190)
+
+def pipeprinter():
+    for row in range(4):
+        for col in range(6):
+            print(getcc(config._pipes[row,col]),end="")
+        print("")
+
+def brickwallsprinter():
+    for row in range(3):
+        for col in range(50):
+              print(getcc(config._brickwalls[row,col]),end="")
+        print("")
+
+
+pipeprinter()
+            
