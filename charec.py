@@ -14,7 +14,7 @@ class characters :
             self._endy = ey 
         
         def get_coods(self):
-            return ((self._x,self._y.self._endx,self._endy))
+            return (self._x,self._y,self._endx,self._endy)
         
 
 
@@ -28,7 +28,7 @@ class Mario(characters) :
         self.speed = 1 
         self.damage = 10
         self.struct  = np.chararray((3,3))
-        self.struct [:,:]= " "
+        self.struct [:,:]= ""
         self.struct[0,1]="@"
         self.struct[1,0]="/"
         self.struct[1,1]="|"
@@ -59,6 +59,7 @@ class Mario(characters) :
         self._endx -= self.speed
         board._bufferboard[ox:oendx,oy:oendy] = ""
         board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        print("i try")
         
     def moveLeft(self,board):
         ox = self._x
@@ -79,6 +80,8 @@ class Mario(characters) :
         self._endy += self.speed
         board._bufferboard[ox:oendx,oy:oendy] = ""
         board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct 
+       
+        
      
     def move(self,ch , board ):
         if ch == 'w' :
@@ -87,8 +90,9 @@ class Mario(characters) :
             self.moveDown(board)
         elif ch == 'a':
             self.moveLeft(board)
-        elif ch == 'd' :
+        elif ch == 'd':
             self.moveRight(board)
+       
     
     
         

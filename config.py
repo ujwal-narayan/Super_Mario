@@ -19,7 +19,7 @@ mari[:,:] = "+"
 #6*13 size mario
 '''
 _mario  = np.chararray((3,3))
-_mario [:,:]= " "
+_mario [:,:]= ""
 _mario[0,1]="@"
 _mario[1,0]="/"
 _mario[1,1]="|"
@@ -115,19 +115,42 @@ ground_coods_ey=None
 
 
 #pipes 
-_pipes = np.chararray((4,6))
+_pipes = np.chararray((4,8))
 _pipes [:,:] = " "
-_pipes[1:,1:2] = 'p'
-_pipes[1:,4:5] = 'p'
-_pipes[0,0]='_'
-_pipes[0,5]='_'
-_pipes[1,1] = 'p'
-_pipes[1,4] = 'p'
+_pipes[1:,1] = 'p'
+_pipes[1:,6] = 'p'
+_pipes[0,:]='_'
+
+
+_bigpipes = np.chararray((6,6))
+_bigpipes [:,:] = " "
+_bigpipes[0,:]='_'
+_bigpipes[1:,1] = 'p'
+_bigpipes[1:,4:5] = 'p'
+
+
+
 
 #brickwalls 
 
-_brickwalls = np.chararray((3,50))
-_brickwalls[:,:] = "bT"
+_brickwalls = np.chararray((2,4))
+_brickwalls[:,:] = "b"
+
+#enemy1
+
+_mushroom = np.chararray((2,4))
+_mushroom[:,:] = "M"
+_mushroom[1,0] = " "
+_mushroom[-1,-1] = " "
+
+#enemy2
+
+_turtle = np.chararray((3,3))
+_turtle[:,:]=""
+_turtle[0,1]= _turtle[1,0] = _turtle[1,-1] = '0'
+_turtle[-1,0] = _turtle[-1,-1] = 'l'
+
+#enemy3
 
 
 
