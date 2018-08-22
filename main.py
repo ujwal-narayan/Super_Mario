@@ -2,12 +2,16 @@ import input
 import os 
 import sys 
 import time
-from board import Board
+
+import board as b 
 from charec import Mario
+import config
 
 
-board = Board(20,390,0)
+board = b.level1
 mario = Mario(-6,-3,0,3,board)
+config.level=1
+
 
 
 '''
@@ -26,11 +30,14 @@ while True :
 '''
 a='r'
 
-
+quit_val = 1
 while a=='r':
+    if config.level == 2 :
+        break
     p_input = (input.get_input())
 
     if p_input == 'q':
+        quit_val = 0
         break
 
     # cur_round = datetime.datetime.now()
@@ -40,16 +47,57 @@ while a=='r':
         # prev_round = cur_round"""
 
     mario.move(p_input , board)
-    board.render()
+    board.render((mario._y - 25))
     #board.printer(0,20,0,190)
     print(mario.get_coods())
-    time.sleep(0.001)
+
+    time.sleep(0.02)
+    if(mario._endx < -3 ):
+        mario.move('s',board)
+    mario.timeSinceLastJump += 1
+    print(mario.timeSinceLastJump)
    
+   
+
+if config.level == 2:
+    print("MOVING TO LEVEL 2 ")
+    time.sleep(1)
+    board = b.level2
+    mario = Mario(-6,-3,320,323,board)  
+
+    while a=='r':
     
+        p_input = (input.get_input())
+
+        if p_input == 'q':
+            quit_val = 0
+            break
+
+    
+
+        mario.move(p_input , board)
+        board.render((mario._y - 25))
+        #board.printer(0,20,0,190)
+        print(mario.get_coods())
+
+        time.sleep(0.02)
+        if(mario._endx < -3 ):
+            mario.move('s',board)
+        mario.timeSinceLastJump += 1
+        print(mario.timeSinceLastJump)
+    
+        
+    
+os.system('clear')
+if quit_val == 0:
+    print("Quitting ")
+    exit()
+
+
     
 
 '''
-os.system('clear')
+ os.system('clear')
 print("Restart?")
 a=input._getch()
 os.system('reset')

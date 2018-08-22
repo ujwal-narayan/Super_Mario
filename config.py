@@ -59,10 +59,10 @@ scores = {
     _e1: 100
 }
 # number of properties per level (0 is debug)
-enemies = [0, 2, 3, 4]
-bricks = [0, 5, 7, 9]
+enemies = []
+
 lives = [10, 3, 5, 7]
-bombs = [20, 5, 6, 7]
+
 timelimit = [100, 90, 90, 80]
 timers = [
     [5],
@@ -71,8 +71,6 @@ timers = [
     [4, 6, 9]
 ]
 
-# scaling and move factor
-x_fac, y_fac = (4, 2)
 
 
 '''
@@ -102,7 +100,7 @@ def getcc(ch):
 
 def printcc(st, color):
     try:
-        return colors[color] + st + ENDC
+        return colors[color] + st + END
     except KeyError:
         return st
 
@@ -122,11 +120,17 @@ _pipes[1:,6] = 'p'
 _pipes[0,:]='_'
 
 
-_bigpipes = np.chararray((6,6))
+_bigpipes = np.chararray((6,8))
 _bigpipes [:,:] = " "
 _bigpipes[0,:]='_'
 _bigpipes[1:,1] = 'p'
-_bigpipes[1:,4:5] = 'p'
+_bigpipes[1:,-2] = 'p'
+
+_goingdownpipe = np.chararray((6,10))
+_goingdownpipe [:,:] = " "
+_goingdownpipe[0,:]='_'
+_goingdownpipe[1:,1] = 'p'
+_goingdownpipe[1:,-2] = 'p'
 
 
 
@@ -135,6 +139,35 @@ _bigpipes[1:,4:5] = 'p'
 
 _brickwalls = np.chararray((2,4))
 _brickwalls[:,:] = "b"
+
+#the zigzaggy wall 
+_zigzagwall = np.chararray((10,14))
+_zigzagwall[:,:]=""
+_zigzagwall[:,-1]='W'
+_zigzagwall[-3:,3:]='W'
+_zigzagwall[-5:,-8:]='W'
+_zigzagwall[-7:,-5:]='W'
+_zigzagwall[-9:,-3:]='W'
+_zigzagwall[-1:,:]='W'
+
+#flag post 
+_flagpost = np.chararray((10,2))
+_flagpost [:,:] = "l"
+#add a flag or a triangle on top 
+#_flagpost[:,:]
+
+#castle 
+_castle = np.chararray((8,10))
+_castle[:,:]= ""
+_castle[-4:,:]="C"
+_castle[2:4,2:8]="C"
+_castle[-2:,4:7]="B"
+_castle[-3,4:7]="B"
+_castle[2:4,3]="B"
+_castle[2:4,6]="B"
+_castle[0,4:6]="C"
+_castle[1,3:7]="C"
+
 
 #enemy1
 
@@ -154,3 +187,8 @@ _turtle[-1,0] = _turtle[-1,-1] = 'l'
 
 
 
+'''constants '''
+speed = 1
+jump = 5
+mushroom_speed = 3
+level = 0

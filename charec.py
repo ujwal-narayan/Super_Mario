@@ -1,5 +1,8 @@
 """ List of All characters and their capabilities """
 import numpy as np
+from collision import move_maadi
+import config
+import board
 class characters :
         """ Common for all characters """
         def __init__(self , x, y ,ex , ey):
@@ -25,73 +28,123 @@ class Mario(characters) :
         super(Mario, self ).__init__(x,y,ex,ey)
         self.lives = lives 
         self.score = 0 
-        self.speed = 1 
+        self.speed = config.speed
+        self.jump = config.jump 
+        self.timeSinceLastJump = 100
+        self.jumpCounter = 0
         self.damage = 10
-        self.struct  = np.chararray((3,3))
-        self.struct [:,:]= ""
-        self.struct[0,1]="@"
-        self.struct[1,0]="/"
-        self.struct[1,1]="|"
-        self.struct[1,2]="\\"
-        self.struct[2,0]=self.struct[1,0]
-        self.struct[2,2]=self.struct[1,2]
+        self.struct = config._mario
         board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
 
   
        
     
-    def moveDown(self,board):
+    def moveDown(self,board,direction):
         ox = self._x
         oendx = self._endx
         oy = self._y
         oendy = self._endy
         self._x += self.speed
         self._endx += self.speed
-        board._bufferboard[ox:oendx,oy:oendy] = ""
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        if  move_maadi(self,board,direction) == True :
+            board._bufferboard[ox:oendx,oy:oendy] = ""
+            board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        else :
+            self._x = ox
+            self._endx = oendx
+            self._y = oy
+            self._endy = oendy
+            
       
-    def moveUp(self,board):
+    def moveUp(self,board,direction):
         ox = self._x
         oendx = self._endx
         oy = self._y
         oendy = self._endy
         self._x -= self.speed
         self._endx -= self.speed
-        board._bufferboard[ox:oendx,oy:oendy] = ""
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
-        print("i try")
+        if  move_maadi(self,board,direction) == True :
+            board._bufferboard[ox:oendx,oy:oendy] = ""
+            board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        else :
+            self._x = ox
+            self._endx = oendx
+            self._y = oy
+            self._endy = oendy
         
-    def moveLeft(self,board):
+    def moveLeft(self,board,direction):
         ox = self._x
         oendx = self._endx
         oy = self._y
         oendy = self._endy
         self._y -= self.speed
         self._endy -= self.speed
-        board._bufferboard[ox:oendx,oy:oendy] = ""
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
-       
-    def moveRight(self,board):
+        if  move_maadi(self,board,direction) == True :
+            board._bufferboard[ox:oendx,oy:oendy] = ""
+            board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        else :
+            self._x = ox
+            self._endx = oendx
+            self._y = oy
+            self._endy = oendy
+
+
+    def moveRight(self,board,direction):
         ox = self._x
         oendx = self._endx
         oy = self._y
         oendy = self._endy
         self._y += self.speed
         self._endy += self.speed
-        board._bufferboard[ox:oendx,oy:oendy] = ""
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct 
-       
+
+        if  move_maadi(self,board,direction) == True :
+            board._bufferboard[ox:oendx,oy:oendy] = ""
+            board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        else :
+            self._x = ox
+            self._endx = oendx
+            self._y = oy
+            self._endy = oendy
+    
+    def jumpUp(self,board,direction):
+        ox = self._x
+        oendx = self._endx
+        oy = self._y
+        oendy = self._endy
+        self._x -= self.jump
+        self._endx -= self.jump
+        jumpPossible = True
+    
+        if self.timeSinceLastJump >  10  :
+            self.jumpCounter = 0
+        else:
+            if(self.jumpCounter > 1):
+                jumpPossible = False
         
+        if  move_maadi(self,board,direction) and (jumpPossible) :
+            board._bufferboard[ox:oendx,oy:oendy] = ""
+            board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+            self.timeSinceLastJump = 0
+            self.jumpCounter += 1
+        else :
+            self._x = ox
+            self._endx = oendx
+            self._y = oy
+            self._endy = oendy
+    
+
      
     def move(self,ch , board ):
-        if ch == 'w' :
-            self.moveUp(board)
-        elif ch == 's':
-            self.moveDown(board)
+       # if ch == 'w' :
+        #    self.moveUp(board,ch)
+        if ch == 's':
+            self.moveDown(board,ch)
         elif ch == 'a':
-            self.moveLeft(board)
+            self.moveLeft(board,ch)
         elif ch == 'd':
-            self.moveRight(board)
+            self.moveRight(board,ch)
+        elif ch == ' ':
+            self.jumpUp(board,'j')
        
     
     
@@ -103,13 +156,8 @@ class Mario(characters) :
         
         
         
-class Mushroom(characters):
-    """ Low level easy peasy enimies """
-    def ___init___(self , x, y,ex,ey ):
-        super(Mushroom , self ).__init__(x,y,ex,ey)
-        self.lives = 1 
-        self.damage = 50 
-        self.speed = 5
+
+        
 
 class Turtles(characters):
     """Medium level annoying beasts """
@@ -125,8 +173,27 @@ class DarthVader(characters):
         super(DarthVader , self).__init__(x,y,ex,ey)
         self.damage = 10
         self.lives = 2 
-        self.speed = 10             
-        
+        self.speed = 10     
+
+'''
+class Mushroom(characters):
+    
+    def ___init___(self , x, ex , y, ey , board ):
+        super(Mushroom , self ).__init__(x,y,ex,ey)
+        self.lives = 1 
+        self.damage = 50 
+        self.speed = 5
+        self.struct = config._mushroom
+        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+'''
+class Mushroom(characters) :
+    """ Low level easy peasy enimies """
+    def __init__(self , x , ex ,y, ey , board,lives = 1):
+        super(Mushroom, self ).__init__(x,y,ex,ey)
+        self.lives = lives
+        self.speed = config.mushroom_speed
+        self.struct = config._mushroom
+        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct        
 
 
 

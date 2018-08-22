@@ -5,12 +5,13 @@ from os import system
 import config
 from colorama import init,Fore,Back,Style
 import sys
+from charec import Mushroom , Turtles , DarthVader
 
 init(autoreset=True)
 class Board:
     """ Its the board and scene gen classs """
 
-    def __init__(self, m, n, level):
+    def __init__(self, m, n):
         """ preferred size = (FILL IT LATER) """
         assert isinstance(m, int) == True
         assert isinstance(n, int) == True
@@ -18,10 +19,12 @@ class Board:
         self.width = n
         self.dimen = (n, m)
         self._bufferboard = np.chararray((m, n))
-        self._bufferboard[:, :] = "s" #config.sky 
+        self._bufferboard[:, :] = "" #config.sky 
         self.framecounter = 0
         self.init_points = []
-        self.level = level
+        self.endlevel_y = 0
+        self.endlevel_endy = 0
+        
 
         self.init_board()
 
@@ -60,7 +63,7 @@ class Board:
                 print(getcc(self._bufferboard[row,col]),end="")
             print("")
 
-    def render(self):
+    def render(self,y):
         # display board at every frame
         sys.stdout.flush()
         try:
@@ -70,7 +73,7 @@ class Board:
         # sys.stdout.write("\n")
         
         for row in range(20):
-            for col in range(100):
+            for col in range(y,y+100 ):
                 try:
                     sys.stdout.write(getcc(self._bufferboard[row,col]))
                 except BaseException:
@@ -81,11 +84,12 @@ class Board:
 #helper functions switch to another file later 
 #put it in config and import later  
 
+
 def getcc (ch):
     if ch == "" :
-        return Back.BLUE + " "
+        return (Back.BLUE + " " )
     elif ch == b'-':
-        return Back.BLUE + u"\u25AC"
+        return (Back.BLUE + u"\u25AC" )
     elif ch == b'+':
         return "#"
     elif ch == b'M':
@@ -101,19 +105,26 @@ def getcc (ch):
     elif ch ==b"g":
         return Fore.GREEN +     '\u2588' 
     elif ch ==b"s":
-        return Fore.BLUE + '\u2588' 
+        return Fore.BLUE + '\u2588'  
     elif ch == b"_":
-        return Fore.LIGHTGREEN_EX +Back.BLUE +  u"\u25AC"
+        return Fore.LIGHTGREEN_EX +Back.BLUE +  u"\u25AC" 
     elif ch == b"b":
-        return Fore.BLACK +Back.LIGHTRED_EX + u"\u2591" 
+        return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
     elif ch == b"p":
-        return Back.BLUE+ Fore.LIGHTGREEN_EX + u"\u2503"
+        return Back.BLUE+ Fore.GREEN+ u"\u2503"
     elif ch == b"M":
         return "M"
     elif ch == b"0":
         return "0"
     elif ch == b"l":
-        return "|"
+        return Back.BLUE + "|"
+    elif ch == b'W':
+        return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
+    elif ch == b"C":
+        return Back.MAGENTA + Fore.BLACK +u"\u2591"
+    elif ch == b"B":
+        return Fore.BLACK + u"\u2591"
+
 
    
 
@@ -155,17 +166,49 @@ def turtleprinter():
             
 levels=[]
 levels.append("debug")
-level1= Board(20,300,1)
+level1= Board(20,500)
+level1.endlevel_y = 342
+level1.endlevel_endy = 345 
+levels.append(level1)
+mush_1 = Mushroom(-5,-3,28,32,level1)
+mush_2 = Mushroom(-5,-3,105,109,level1)
+mush_3 = Mushroom(-5,-3,170,174,level1)
+mush_4 = Mushroom(-5,-3,176,180,level1)
+mush_5 = Mushroom(-5,-3,220,224,level1)
+mush_6 = Mushroom(-5,-3,265,269,level1)
+mush_7 = Mushroom(-5,-3,273,277,level1 )
+enms_1= [mush_1,mush_2,mush_3,mush_4,mush_5,mush_6,mush_7]
 
 #defining level 1 
-level1._bufferboard[-5:-3,28:32 ]=config._mushroom
+#level1._bufferboard[-5:-3,28:32 ]=e1
 level1._bufferboard[-9:-7,34:38] = config._brickwalls
 level1._bufferboard[-9:-7,43:47] = config._brickwalls
 level1._bufferboard[-9:-7,47:51] = config._brickwalls
 level1._bufferboard[-9:-7,51:55] = config._brickwalls
 level1._bufferboard[-7:-3,66:74] = config._pipes
-level1._bufferboard[-9:-3,90:96] = config._bigpipes
+level1._bufferboard[-9:-3,90:98] = config._bigpipes
+#level1._bufferboard[-5:-3,105:109 ]=config._mushroom
+level1._bufferboard[-9:-7,106:110] = config._brickwalls
+level1._bufferboard[-9:-7,110:114] = config._brickwalls
+level1._bufferboard[-9:-7,114:118] = config._brickwalls
+level1._bufferboard[-9:-3,150:158] = config._bigpipes
+#level1._bufferboard[-5:-3,170:174 ]=config._mushroom
+#level1._bufferboard[-5:-3,176:180 ]=config._mushroom
+level1._bufferboard[-9:-3,200:210] = config._goingdownpipe
+#level1._bufferboard[-5:-3,220:224 ]=config._mushroom
+level1._bufferboard[-7:-3,238:246] = config._pipes
+level1._bufferboard[-9:-7,260:264] = config._brickwalls
+level1._bufferboard[-9:-7,264:268] = config._brickwalls
+level1._bufferboard[-9:-7,268:272] = config._brickwalls
+level1._bufferboard[-9:-7,272:276] = config._brickwalls
+level1._bufferboard[-9:-7,284:288] = config._brickwalls
+level1._bufferboard[-9:-7,280:284] = config._brickwalls
+#level1._bufferboard[-5:-3,265:269 ]=config._mushroom
+#level1._bufferboard[-5:-3,273:277 ]=config._mushroom
+level1._bufferboard[-13:-3,300:314] = config._zigzagwall
+level1._bufferboard[-13:-3,328:330] = config._flagpost
+level1._bufferboard[-11:-3,338:348] = config._castle
 
 
+level2 = Board(20,500)
 
-level1.render()
