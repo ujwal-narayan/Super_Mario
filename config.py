@@ -11,7 +11,8 @@ _ground = u"\u2588"
 
 _sky = u"\u2588"
 
-_bricks = u"\u2588"
+
+
 '''
 _
 mari = np.chararray((7,137))
@@ -54,10 +55,12 @@ types = {
     #_e3 : "DarthVader"
 }
 # scores
+'''
 scores = {
     _bricks : 20,
     _e1: 100
 }
+'''
 # number of properties per level (0 is debug)
 enemies = []
 

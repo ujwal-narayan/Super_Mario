@@ -31,6 +31,8 @@ while True :
 a='r'
 
 quit_val = 1
+timer = time.time()
+timer1 = time.time()
 while a=='r':
     if config.level == 2 :
         break
@@ -52,12 +54,17 @@ while a=='r':
     print(mario.get_coods())
 
     time.sleep(0.02)
-    if(mario._endx < -3 ):
-        mario.move('s',board)
-    mario.timeSinceLastJump += 1
-    print(mario.timeSinceLastJump)
-    for i in b.enms_1:
-        i.move(board)
+    if time.time() > timer1 + 0.01:
+        if(mario._endx < -3 ):
+            mario.move('s',board)
+        mario.timeSinceLastJump += 1
+        print(mario.timeSinceLastJump)
+        timer1 = time.time()
+    if time.time() > timer + 0.1 :
+        
+        for i in b.enms_1:
+            i.move(board)
+        timer = time.time()
    
    
 
@@ -70,6 +77,7 @@ if config.level == 2:
     while a=='r':
     
         p_input = (input.get_input())
+
 
         if p_input == 'q':
             quit_val = 0

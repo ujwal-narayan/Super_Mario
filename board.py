@@ -5,7 +5,7 @@ from os import system
 import config
 from colorama import init,Fore,Back,Style
 import sys
-from charec import Mushroom , Turtles , DarthVader
+from charec import Mushroom , Turtles , DarthVader,Pipes,Flagpost,BigPipes,Bricks,Castle,SldingPipes,ZigZagWall
 
 init(autoreset=True)
 class Board:
@@ -26,6 +26,8 @@ class Board:
         self.endlevel_endy = 0
         self.endlevel_x=0
         self.endlevel_endx=0
+        self.enms = 0
+        self.obs = []
 
         
 
@@ -183,7 +185,28 @@ mush_5 = Mushroom(-5,-3,220,224,level1)
 mush_6 = Mushroom(-5,-3,265,269,level1)
 mush_7 = Mushroom(-5,-3,273,277,level1 )
 enms_1= [mush_1,mush_2,mush_3,mush_4,mush_5,mush_6,mush_7]
-
+level1.enms = enms_1
+obs_1 = Bricks(-9,-7,34,38,level1)
+obs_2 = Bricks(-9,-7,43,47,level1)
+obs_3 = Bricks(-9,-7,47,51,level1)
+obs_4 = Bricks(-9,-7,51,55,level1)
+obs_5 = Pipes(-7,-3,66,74,level1)
+obs_6 = BigPipes(-9,-3,90,98,level1)
+obs_7 = Bricks(-9,-7,106,110,level1)
+obs_8 = Bricks(-9,-7,110,114,level1)
+obs_9 = Bricks(-9,-7,114,118,level1)
+obs_10 = BigPipes(-9,-3,150,158,level1)
+obs_11 = SldingPipes(-9,-3,200,210,level1)
+obs_11 = Bricks(-9,-7,260,264,level1)
+obs_12 = Bricks(-9,-7,264,268,level1)
+obs_13 = Bricks(-9,-7,268,272,level1)
+obs_14 = Bricks(-9,-7,272,276,level1)
+obs_15 = ZigZagWall(-13,-3,300,314,level1)
+obs_16 = Flagpost(-13,-3,328,330,level1)
+obs_17 = Castle (-11,-3,338,348,level1)
+obs1 = [obs_1,obs_2,obs_3,obs_4,obs_5,obs_6,obs_7,obs_8,obs_9,obs_10,obs_11,obs_12,obs_13,obs_14,obs_15,obs_16,obs_17]
+level1.obs = obs1
+'''
 #defining level 1 
 #level1._bufferboard[-5:-3,28:32 ]=e1
 level1._bufferboard[-9:-7,34:38] = config._brickwalls
@@ -213,7 +236,7 @@ level1._bufferboard[-9:-7,280:284] = config._brickwalls
 level1._bufferboard[-13:-3,300:314] = config._zigzagwall
 level1._bufferboard[-13:-3,328:330] = config._flagpost
 level1._bufferboard[-11:-3,338:348] = config._castle
-
+'''
 
 level2 = Board(20,500)
 

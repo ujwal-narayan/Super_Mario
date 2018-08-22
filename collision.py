@@ -45,6 +45,14 @@ def move_maadi(self,board,ch):
     if ( ch == 's'):
         for col in range(self._y,self._endy):
             for row in range(self._endx-1,self._endx):
+                if ( board._bufferboard[row,col] == b"M"):
+                    for i in board.enms:
+                        if (self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy):
+                            board._bufferboard[i._x:i._endx , i._y:i._endy] = ""
+                            board.enms.remove(i)
+                            print("delet")
+                            break
+                            
                 if ( board._bufferboard[row, col ] != ""):
                     self.timeSinceLastJump = 10
                     return False
