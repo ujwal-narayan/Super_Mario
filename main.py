@@ -56,6 +56,8 @@ while a=='r':
         mario.move('s',board)
     mario.timeSinceLastJump += 1
     print(mario.timeSinceLastJump)
+    for i in b.enms_1:
+        i.move(board)
    
    
 

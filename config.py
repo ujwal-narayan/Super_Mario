@@ -114,20 +114,20 @@ ground_coods_ey=None
 
 #pipes 
 _pipes = np.chararray((4,8))
-_pipes [:,:] = " "
+_pipes [:,:] = ""
 _pipes[1:,1] = 'p'
 _pipes[1:,6] = 'p'
 _pipes[0,:]='_'
 
 
 _bigpipes = np.chararray((6,8))
-_bigpipes [:,:] = " "
+_bigpipes [:,:] = ""
 _bigpipes[0,:]='_'
 _bigpipes[1:,1] = 'p'
 _bigpipes[1:,-2] = 'p'
 
 _goingdownpipe = np.chararray((6,10))
-_goingdownpipe [:,:] = " "
+_goingdownpipe [:,:] = ""
 _goingdownpipe[0,:]='_'
 _goingdownpipe[1:,1] = 'p'
 _goingdownpipe[1:,-2] = 'p'

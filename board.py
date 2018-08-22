@@ -24,6 +24,9 @@ class Board:
         self.init_points = []
         self.endlevel_y = 0
         self.endlevel_endy = 0
+        self.endlevel_x=0
+        self.endlevel_endx=0
+
         
 
         self.init_board()
@@ -169,6 +172,8 @@ levels.append("debug")
 level1= Board(20,500)
 level1.endlevel_y = 342
 level1.endlevel_endy = 345 
+level1.endlevel_x=-6
+level1.endlevel_endx=-3
 levels.append(level1)
 mush_1 = Mushroom(-5,-3,28,32,level1)
 mush_2 = Mushroom(-5,-3,105,109,level1)
