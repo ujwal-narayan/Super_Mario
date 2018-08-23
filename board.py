@@ -11,7 +11,7 @@ init(autoreset=True)
 class Board:
     """ Its the board and scene gen classs """
 
-    def __init__(self, m, n):
+    def __init__(self, m, n,ex=0,eex=0,ey=0,eey=0,enemy = [] , obsta = [] , player = 0   ):
         """ preferred size = (FILL IT LATER) """
         assert isinstance(m, int) == True
         assert isinstance(n, int) == True
@@ -22,12 +22,21 @@ class Board:
         self._bufferboard[:, :] = "" #config.sky 
         self.framecounter = 0
         self.init_points = []
-        self.endlevel_y = 0
-        self.endlevel_endy = 0
-        self.endlevel_x=0
-        self.endlevel_endx=0
-        self.enms = 0
-        self.obs = []
+        self.endlevel_y = ey
+        self.endlevel_endy = eey
+        self.endlevel_x= ex
+        self.endlevel_endx=eex
+        self.enms = enemy
+        self.obs = obsta
+        self.mariospawn_x = -6
+        self.mariospawn_endx = -3 
+        self.mariospawn_y = 0
+        self.mariospawn_endy =3
+        self.player = player
+        for i in self.enms :
+            i.__init__(i._x,i._endx,i._y,i._endy,self)
+        for i in self.obs:
+            i.__init__(i._x,i._endx,i._y,i._endy,self)
 
         
 
@@ -171,7 +180,7 @@ def turtleprinter():
             
 levels=[]
 levels.append("debug")
-level1= Board(20,500)
+level1= Board(20,500,-6,-3,342,345)
 level1.endlevel_y = 342
 level1.endlevel_endy = 345 
 level1.endlevel_x=-6

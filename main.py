@@ -11,6 +11,7 @@ import config
 board = b.level1
 mario = Mario(-6,-3,0,3,board)
 config.level=1
+board.player = mario
 
 
 

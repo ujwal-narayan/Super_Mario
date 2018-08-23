@@ -15,7 +15,7 @@ class Characters:
         self._y = y
         self.speed = 0
         self.damage = 0
-        self.dies = True
+        self.killedByEnms = False
         self.lives = 0
         self._endx = ex
         self._endy = ey
@@ -31,12 +31,13 @@ class Characters:
         oendy = self._endy
         self._x += 1
         self._endx += 1
-        if move_maadi(self, board, direction) == True:
+        ret_val = move_maadi(self, board, direction)
+        if ret_val == 1:
             board._bufferboard[ox:oendx, oy:oendy] = ""
             board._bufferboard[self._x:self._endx,
                                self._y:self._endy] = self.struct
             return True
-        else:
+        elif ret_val == 0: 
             self._x = ox
             self._endx = oendx
             self._y = oy
@@ -50,12 +51,13 @@ class Characters:
         oendy = self._endy
         self._x -= 1
         self._endx -= 1
-        if move_maadi(self, board, direction) == True:
+        ret_val =  move_maadi(self, board, direction)
+        if ret_val == 1:
             board._bufferboard[ox:oendx, oy:oendy] = ""
             board._bufferboard[self._x:self._endx,
                                self._y:self._endy] = self.struct
             return True
-        else:
+        elif ret_val == 0:
             self._x = ox
             self._endx = oendx
             self._y = oy
@@ -69,12 +71,13 @@ class Characters:
         oendy = self._endy
         self._y -= 1
         self._endy -= 1
-        if move_maadi(self, board, direction) == True:
+        ret_val =  move_maadi(self, board, direction)
+        if ret_val == 1:
             board._bufferboard[ox:oendx, oy:oendy] = ""
             board._bufferboard[self._x:self._endx,
                                self._y:self._endy] = self.struct
             return True
-        else:
+        elif ret_val == 0:
             self._x = ox
             self._endx = oendx
             self._y = oy
@@ -89,12 +92,13 @@ class Characters:
         self._y += 1
         self._endy += 1
 
-        if move_maadi(self, board, direction) == True:
+        ret_val = move_maadi(self, board, direction)
+        if ret_val == 1:
             board._bufferboard[ox:oendx, oy:oendy] = ""
             board._bufferboard[self._x:self._endx,
                                self._y:self._endy] = self.struct
             return True
-        else:
+        elif ret_val == 0:
             self._x = ox
             self._endx = oendx
             self._y = oy
@@ -116,7 +120,7 @@ class Characters:
 class Mario(Characters):
     """ issa me , Mario """
 
-    def __init__(self, x, ex, y, ey, board,  lives=1):
+    def __init__(self, x, ex, y, ey, board,  lives=3):
         super(Mario, self).__init__(x, y, ex, ey, board)
         self.lives = lives
         self.score = 0
@@ -125,6 +129,7 @@ class Mario(Characters):
         self.timeSinceLastJump = 100
         self.jumpCounter = 0
         self.damage = 10
+        self.killedByEnms = True
         self.struct = config._mario
         board._bufferboard[self._x:self._endx,
                            self._y:self._endy] = self.struct
@@ -144,13 +149,14 @@ class Mario(Characters):
             if(self.jumpCounter > 2 * self.jump):
                 jumpPossible = False
 
-        if move_maadi(self, board, direction) and (jumpPossible):
+        ret_val = move_maadi(self, board, direction)
+        if (ret_val == 1) and (jumpPossible):
             board._bufferboard[ox:oendx, oy:oendy] = ""
             board._bufferboard[self._x:self._endx,
                                self._y:self._endy] = self.struct
             self.timeSinceLastJump = 0
             self.jumpCounter += 1
-        else:
+        elif ret_val == 2:
             self._x = ox
             self._endx = oendx
             self._y = oy
