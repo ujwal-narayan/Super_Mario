@@ -71,6 +71,7 @@ class Board:
         self._bufferboard[-3:,:] = "g"#config._ground
         if config.level == 2 :
             self._bufferboard[-3:,76:83] =""
+            self._bufferboard[-3:,137:142] = ""
      
 
         #assigning mario 
@@ -80,11 +81,7 @@ class Board:
 
         #self._bufferboard[-6:-3,:3]= _mario
 
-    def printer(self,screenview_height_start , screenview_height_end,screenview_width_start , screenview_width_end):
-        for row in range(screenview_height_start,screenview_height_end):
-            for col in range(screenview_width_start,screenview_width_end):
-                print(getcc(self._bufferboard[row,col]),end="")
-            print("")
+
 
     def render(self,y):
         # display board at every frame
@@ -109,56 +106,112 @@ class Board:
 
 
 def getcc (self,ch):
-    if ch == "" :
-        return (Back.BLUE + " " )
-    elif ch == b'-':
-        return (Back.BLUE + u"\u25AC" )
-    elif ch == b'+':
-        return "#"
-    elif ch == b'M':
-        return Back.BLUE + "M"
-    elif ch == b'\\':
-        if self.player.powerup1:
-            return Fore.RED +  Back.BLUE + "\\"
-        return  Back.BLUE + "\\"
-    elif ch == b'/':
-        if self.player.powerup1:
-            return Fore.RED +  Back.BLUE + "/"
-        return  Back.BLUE + "/"
-    elif ch == b'@':
-        if self.player.powerup1:
-            return Fore.RED +  Back.BLUE + "@"
-        return Back.BLUE + "@"
-    elif ch == b'|':
-        if self.player.powerup1:
-            return Fore.RED +  Back.BLUE + "|"
-        return Back.BLUE + "|"
-    elif ch ==b"g":
-        return Fore.GREEN +     '\u2588' 
-    elif ch ==b"s":
-        return Fore.BLUE + '\u2588'  
-    elif ch == b"_":
-        return Fore.LIGHTGREEN_EX +Back.BLUE +  u"\u25AC" 
-    elif ch == b"b":
-        return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
-    elif ch == b"p":
-        return Back.BLUE+ Fore.GREEN+ u"\u2503"
-    elif ch == b"M":
-        return "M"
-    elif ch == b"l":
-        return Back.BLUE + "|"
-    elif ch == b'W':
-        return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
-    elif ch == b"C":
-        return Back.MAGENTA + Fore.BLACK +u"\u2591"
-    elif ch == b"B":
-        return Fore.BLACK + u"\u2591"
-    elif ch == b"G":
-        return Fore.CYAN + Back.BLUE+ 'O'
-    elif ch == b"0":
-        return Back.BLUE + '0'
-    elif ch == b"c":
-        return Back.BLUE + Fore.YELLOW +  	 	u"\U0001F4B0"
+    if config.level == 2:
+        if ch == "" :
+            return (Back.LIGHTWHITE_EX + " " ) 
+        elif ch == b'-':
+            return (Back.LIGHTWHITE_EX + u"\u25AC" )
+        elif ch == b'+':
+            return "#"
+        elif ch == b'M':
+            return Back.LIGHTWHITE_EX + "M" 
+        elif ch == b'\\':
+            if self.player.powerup1:
+                return Fore.RED +  Back.LIGHTWHITE_EX + "\\" 
+            return  Back.LIGHTWHITE_EX + "\\"
+        elif ch == b'/':
+            if self.player.powerup1:
+                return Fore.RED +  Back.LIGHTWHITE_EX + "/"
+            return  Back.LIGHTWHITE_EX + "/" 
+        elif ch == b'@':
+            if self.player.powerup1:
+                return Fore.RED +  Back.LIGHTWHITE_EX + "@"
+            return Back.LIGHTWHITE_EX + "@" 
+        elif ch == b'|':
+            if self.player.powerup1:
+                return Fore.RED +  Back.LIGHTWHITE_EX + "|"
+            return Back.LIGHTWHITE_EX + "|" 
+        elif ch ==b"g":
+            return Fore.GREEN +     '\u2588' 
+        elif ch ==b"s":
+            return Fore.LIGHTWHITE_EX + '\u2588'  
+        elif ch == b"_":
+            return Fore.LIGHTGREEN_EX +Back.LIGHTWHITE_EX +  u"\u25AC" 
+        elif ch == b"b":
+            return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
+        elif ch == b"p":
+            return Back.LIGHTWHITE_EX+ Fore.GREEN+ u"\u2503"
+        elif ch == b"M":
+            return "M"
+        elif ch == b"l":
+            return Back.LIGHTWHITE_EX  + "|" 
+        elif ch == b'W':
+            return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
+        elif ch == b"C":
+            return Back.MAGENTA  +u"\u2591"
+        elif ch == b"B":
+            return Fore.BLACK + u"\u2591"
+        elif ch == b"G":
+            return Fore.CYAN + Back.LIGHTWHITE_EX+ 'O'
+        elif ch == b"0":
+            return Back.LIGHTWHITE_EX + '0' 
+        elif ch == b"c":
+            return Back.LIGHTWHITE_EX + Fore.YELLOW +  	 	u"\U0001F4B0"
+            
+    else :
+        if ch == "" :
+            return (Back.BLUE + " " )
+        elif ch == b'-':
+            return (Back.BLUE + u"\u25AC" )
+        elif ch == b'+':
+            return "#"
+        elif ch == b'M':
+            return Back.BLUE + "M"
+        elif ch == b'\\':
+            if self.player.powerup1:
+                return Fore.RED +  Back.BLUE + "\\"
+            return  Back.BLUE + "\\"
+        elif ch == b'/':
+            if self.player.powerup1:
+                return Fore.RED +  Back.BLUE + "/"
+            return  Back.BLUE + "/"
+        elif ch == b'@':
+            if self.player.powerup1:
+                return Fore.RED +  Back.BLUE + "@"
+            return Back.BLUE + "@"
+        elif ch == b'|':
+            if self.player.powerup1:
+                return Fore.RED +  Back.BLUE + "|"
+            return Back.BLUE + "|"
+        elif ch ==b"g":
+            return Fore.GREEN +     '\u2588' 
+        elif ch ==b"s":
+            return Fore.BLUE + '\u2588'  
+        elif ch == b"_":
+            return Fore.LIGHTGREEN_EX +Back.BLUE +  u"\u25AC" 
+        elif ch == b"b":
+            return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
+        elif ch == b"p":
+            return Back.BLUE+ Fore.GREEN+ u"\u2503"
+        elif ch == b"M":
+            return "M"
+        elif ch == b"l":
+            return Back.BLUE + "|"
+        elif ch == b'W':
+            return Fore.BLACK+Back.LIGHTRED_EX+ u"\u2591"
+        elif ch == b"C":
+            return Back.MAGENTA  +u"\u2591"
+        elif ch == b"B":
+            return Fore.BLACK + u"\u2591"
+        elif ch == b"G":
+            return Fore.CYAN + Back.BLUE+ 'O'
+        elif ch == b"0":
+            return Back.BLUE + '0'
+        elif ch == b"c":
+            return Back.BLUE + Fore.YELLOW +  	 	u"\U0001F4B0"
+            
+        
+
 
 
    
@@ -173,31 +226,6 @@ _mario1= "\
 "
 
 
-def pipeprinter():
-    for row in range(4):
-        for col in range(6):
-            print(getcc(config._pipes[row,col]),end="")
-        print("")
-
-def brickwallsprinter():
-    for row in range(3):
-        for col in range(50):
-              print(getcc(config._brickwalls[row,col]),end="")
-        print("")
-
-
-def mushroomprinter():
-    for row in range(2):
-        for col in range(4):
-             print(getcc(config._mushroom[row,col]),end="")
-        print("")
-
-            
-def turtleprinter():
-    for row in range(3):
-        for col in range(3):
-            print(getcc(config._turtle[row,col]),end="")
-        print("")
             
 levels=[]
 levels.append("debug")
@@ -236,7 +264,8 @@ obs_17 = Castle (-11,-3,338,348,level0)
 obs1 = [obs_1,obs_2,obs_3,obs_4,obs_5,obs_6,obs_7,obs_8,obs_9,obs_10,obs_11,obs_12,obs_13,obs_14,obs_15,obs_16,obs_17,obs_18,obs_19]
 
 
-
+enms_2 = enms_1 + []
+obs2 = obs1 + []
 
 '''
 #defining level 1 
@@ -272,12 +301,12 @@ level1._bufferboard[-11:-3,338:348] = config._castle
 
 t1 = Turtles(-5,-3,33,37,level0)
 t2 = Turtles(-5,-3,137,141,level0)
-'''
-enms_1.append(t1)
-enms_1.append(t2)
-enms_1.remove(mush_1)
-enms_1.remove(mush_2)
-'''
+
+enms_2.append(t1)
+enms_2.append(t2)
+enms_2.remove(mush_1)
+enms_2.remove(mush_2)
+
 obs_1 = Bricks(-9,-7,34,38,level0)
 obs_2 = Bricks(-9,-7,43,47,level0)
 obs_3 = Bricks(-9,-7,47,51,level0)
@@ -294,4 +323,30 @@ obs_20 = Pits(-4,-1,30,34,level0)
 c1 =Coins(-7,1,level0)
 c2 = Coins(-7,4,level0)
 c3 = Coins(-7,6,level0)
-coins = [c1,c2,c3]
+c4 = Coins(-15,72,level0)
+c5 = Coins(-14,73,level0)
+c6 = Coins(-13,74,level0)
+c7 = Coins(-13,106,level0)
+c8 = Coins(-13,107,level0)
+c9 = Coins(-13,108,level0)
+c10 = Coins(-13,109,level0)
+c11 = Coins(-13,110,level0)
+c12 = Coins(-13,111,level0)
+c13 = Coins(-13,112,level0)
+c14 = Coins(-13,113,level0)
+c15 = Coins(-13,114,level0)
+c16 = Coins(-13,115,level0)
+c17 = Coins(-13,116,level0)
+c18 = Coins(-13,117,level0)
+c19 = Coins(-13,118,level0)
+c20 = Coins(-13,119,level0)
+c21 = Coins(-8,170,level0)
+c22 = Coins(-8,171,level0)
+c23 = Coins(-8,172,level0)
+c24 = Coins(-8,173,level0)
+c25 = Coins(-8,174,level0)
+c26 = Coins(-8,175,level0)
+c27 = Coins(-8,176,level0)
+c28 = Coins(-8,177,level0)
+c29 = Coins(-8,178,level0)
+coins = [c1,c2,c3 ,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29]

@@ -194,10 +194,14 @@ _turtle [ -1,-1] = " "
 
 #enemy3
 
-_darthvader = np.chararray((2,4))
-_darthvader [ :,:] = "8"
-_darthvader [1,0] = " "
-_darthvader [-1,-1] = " "
+_darthvader = np.chararray((3,3))
+_darthvader [ :,:] = ""
+_darthvader [0,1] = "O"
+_darthvader [1,0] = "["
+_darthvader [ 2,0] = "<"
+_darthvader [2,1:] = "I"
+_darthvader [2,2] = ">"
+_darthvader [2,1] = "]"
 
 
 #coins
@@ -213,3 +217,4 @@ mushroom_speed = 3
 level = 1
 powerup_speed = 5
 reset = False
+x= 0

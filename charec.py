@@ -1,11 +1,11 @@
-""" List of All characters and their capabilities """
+""" List of All Characters and their capabilities """
 import numpy as np
 from collision import move_maadi
 import config
 import board
 import time
-class characters :
-    """ Common for all characters """
+class Characters :
+    """ Common for all Characters """
     def __init__(self , x,ex ,y, ey,board):
         """ Figure out the x and Y shit later """
 
@@ -127,7 +127,7 @@ class characters :
         return ret
         
 
-class Powerup1(characters):
+class Powerup1(Characters):
     """" Comrade Mario , unleash the beasts of revolution . Bring forth da GUNS """
     def __init__(self,x,ex,y,ey,board):
         super(Powerup1,self).__init__(x,ex,y,ey,board)
@@ -156,7 +156,7 @@ class Powerup1(characters):
                     self.mover = 'a'
 
 
-class Mario(characters) :
+class Mario(Characters) :
     """ issa me , Mario """
     def __init__(self , x , ex ,y, ey , board,  lives = 3 ):
         super(Mario, self ).__init__(x,ex,y,ey,board)
@@ -191,7 +191,7 @@ class Mario(characters) :
         if  rt  == 1 and jumpPossible:
             board._bufferboard[ox:oendx,oy:oendy] = ""
             board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
-            self.timeSinceLastJump = 0
+            self.timeSinceLastJump = 0   
             self.jumpCounter += 1
             return True
         elif rt == 0 or not jumpPossible:
@@ -222,7 +222,7 @@ class Mario(characters) :
         elif ch == ' ':
             self.jumpUps(board,'j')
        
-class Mushroom(characters) :
+class Mushroom(Characters) :
     """ Low level easy peasy enimies """
     def __init__(self , x , ex ,y, ey , board,lives = 1):
         super(Mushroom, self ).__init__(x,ex,y,ey,board)
@@ -249,7 +249,7 @@ class Mushroom(characters) :
        
 
 
-class Turtles(characters):
+class Turtles(Characters):
     """Medium level annoying beasts """
     def __init__(self, x, ex,y,ey,board,lives=1) :
         super(Turtles,self).__init__(x,ex,y,ey,board)
@@ -267,13 +267,31 @@ class Turtles(characters):
         else:
             self.speed_imp(board,'d')
 
-class DarthVader(characters):
-    """I AM THE SENATE < the big bad boss himself """
-    def __init__(self, x, ex,y,ey,lives = 2):
-        super(DarthVader , self).__init__(x,y,ex,ey)
+class DarthVader(Characters):
+    """I AM THE SENATE .the big bad boss himself """
+    def __init__(self, x, ex,y,ey,board,lives = 2):
+        super(DarthVader , self).__init__(x,ex,y,ey,board)
         self.damage = 10
-        self.lives = 2 
-        self.speed = 10   
+        self.lives = 3
+        self.speed = 10  
+        self.struct = config._darthvader
+        board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct 
+    
+    def move(self,board):
+        if board.player._endx < -3 :
+            self._y = board.player._y + 1
+            self._endy = board.player._endy + 1
+        else :
+            if  self._y > board.player._y :
+                self.speed_imp(board,'a')
+            else:
+                self.speed_imp(board,'d')
+            
+
+
+
+    
+     
 
 
 

@@ -11,7 +11,7 @@ import config
 
 board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1,b.coins)
 mario = Mario(-6,-3,0,3,board)
-config.level=1
+config.level=2
 board.player = mario
 
 
@@ -35,11 +35,19 @@ a='r'
 quit_val = 1
 timer = time.time()
 timer1 = time.time()
+lev1_start = time.time()
+
 while a=='r':
     if config.level == 2 :
+        mario.score += round(config.x)
         break
     p_input = (input.get_input())
-
+    config.x = 200 - (time.time()-lev1_start)
+    if config.x <= 0 :
+        print("TIME IS UP")
+        print("Score :" ,end="")
+        print(mario.score)
+        exit()
     if p_input == 'q':
         quit_val = 0
         break
@@ -54,28 +62,39 @@ while a=='r':
     board.render((mario._y - 25))
     #board.printer(0,20,0,190)
     print(mario.get_coods())
-    print(b.guns_1._cendx)
+    print("Score :" ,end="")
+    print(mario.score)
+    print("Lives left :", end="")
+    print(mario.lives)
+    print("Time left " , end="")
+    print(round(config.x))
 
     if time.time() > timer1 :
         if(mario._endx < -3 ):
             mario.move('s',board)
         mario.timeSinceLastJump += 1
-        print(mario.timeSinceLastJump)
+        
         timer1 = time.time()
     if time.time() > timer + 1 :
         
         for i in board.enms:
             i.move(board)
         timer = time.time()
-    print(p_input)
-    print(mario.powerup1)
+    
 
 
 
 if config.level == 2:
+
     print("MOVING TO LEVEL 2 ")
     time.sleep(1)
-    board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1,mario)
+    board= b.Board(20,500,-6,-3,342,345,b.enms_2,b.obs2,b.coins,mario)
+    
+    mario.self_x = -6
+    mario.self_endx = -3
+    mario.self_y = 0
+    mario.self_endy = 3 
+    lv2_START = time.time()
 
     while a=='r':
     
@@ -86,29 +105,38 @@ if config.level == 2:
             quit_val = 0
             break
 
-    
+        config.x = 200 - (time.time()-lv2_START)
+        if config.x <= 0:
+            print("TIMES UP")
+            print("Score :" ,end="")
+            print(mario.score)
+            exit()
 
             
         mario.move(p_input , board)
         board.render((mario._y - 25))
         #board.printer(0,20,0,190)
         print(mario.get_coods())
-        print(b.guns_1._cendx)
+        print("Score :" ,end="")
+        print(mario.score)
+        print("Lives left :", end="")
+        print(mario.lives)
+        print("Time left " , end="")
+        print(round(config.x))
 
         time.sleep(00.02)
         if time.time() > timer1 :
             if(mario._endx < 0 ):
                 mario.move('s',board)
             mario.timeSinceLastJump += 1
-            print(mario.timeSinceLastJump)
+          
             timer1 = time.time()
         if time.time() > timer + 1 :
             
             for i in board.enms:
                 i.move(board)
             timer = time.time()
-        print(p_input)
-        print(mario.powerup1)
+        
 
     
     os.system('clear')
