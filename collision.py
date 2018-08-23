@@ -29,7 +29,7 @@ def move_maadi(self,board,ch):
                 if (self.killedByEnms):
                     if ( board._bufferboard[row,col] == b"M"):
                         for i in board.enms:
-                            if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)):
+                            if ((self._y >= i._y and self._endy >= i._y) or ( self._endy <= i._endy and self._y <= i._endy)):
                                     rtrn = reset(self,board,'a')
                                     if rtrn == 1:
                                         return 2
@@ -37,7 +37,7 @@ def move_maadi(self,board,ch):
                                         return 1
                     if (board._bufferboard[row,col] == b"G"):
                         for i in board.enms:
-                            if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)):
+                            if ((self._y >= i._y and self._endy >= i._y) or ( self._endy <= i._endy and self._y <= i._endy)):
                                 board._bufferboard[i._x:i._endx , i._y:i._endy] = ""
                                 board.enms.remove(i) 
                                 self.powerup1 = True
@@ -173,7 +173,7 @@ def reset(self,board,ch):
                 for col in range(self._y,self._y + 1):
                         if (board._bufferboard[row,col] == b"M"):
                             for i in board.enms:
-                                if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)):
+                                if ((self._y >= i._y and self._endy >= i._y) or ( self._endy <= i._endy and self._y <= i._endy)):
                                     board._bufferboard[i._x:i._endx , i._y:i._endy] = ""
                                     board.enms.remove(i) 
                                     return 2
