@@ -54,20 +54,22 @@ while a=='r':
     board.render((mario._y - 25))
     #board.printer(0,20,0,190)
     print(mario.get_coods())
+    print(b.guns_1._cendx)
 
-    time.sleep(0.02)
-    if time.time() > timer1 + 0.01:
+    time.sleep(00.02)
+    if time.time() > timer1 :
         if(mario._endx < -3 ):
             mario.move('s',board)
         mario.timeSinceLastJump += 1
         print(mario.timeSinceLastJump)
         timer1 = time.time()
-    if time.time() > timer + 0.1 :
+    if time.time() > timer + 1 :
         
         for i in board.enms:
             i.move(board)
         timer = time.time()
-   
+    print(p_input)
+    print(mario.powerup1)
 
 if config.level == 2:
     print("MOVING TO LEVEL 2 ")
@@ -90,13 +92,13 @@ if config.level == 2:
         board.render((mario._y - 25))
         #board.printer(0,20,0,190)
         print(mario.get_coods())
+        print(p_input)
 
         time.sleep(0.02)
         if(mario._endx < -3 ):
             mario.move('s',board)
         mario.timeSinceLastJump += 1
-        print(mario.timeSinceLastJump)
-    
+        
         
     
 os.system('clear')

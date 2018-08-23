@@ -5,7 +5,7 @@ from os import system
 import config
 from colorama import init,Fore,Back,Style
 import sys
-from charec import Mushroom , Turtles , DarthVader,Pipes,Flagpost,BigPipes,Bricks,Castle,SldingPipes,ZigZagWall
+from charec import Mushroom , Turtles , DarthVader,Pipes,Flagpost,BigPipes,Bricks,Castle,SldingPipes,ZigZagWall,Powerup1
 import time
 init(autoreset=True)
 class Board:
@@ -38,7 +38,7 @@ class Board:
         self.resen = enemy
         self.resob = obsta
         for i in self.enms :
-            i.__init__(i._x,i._endx,i._y,i._endy,self)
+            i.__init__(i._cx,i._cendx,i._cy,i._cendy,self)
         for i in self.obs:
             i.__init__(i._x,i._endx,i._y,i._endy,self)
 
@@ -142,6 +142,8 @@ def getcc (ch):
         return Back.MAGENTA + Fore.BLACK +u"\u2591"
     elif ch == b"B":
         return Fore.BLACK + u"\u2591"
+    elif ch == b"G":
+        return Fore.CYAN + Back.BLUE+ 'O'
 
 
    
@@ -194,7 +196,8 @@ mush_4 = Mushroom(-5,-3,176,180,level0)
 mush_5 = Mushroom(-5,-3,220,224,level0)
 mush_6 = Mushroom(-5,-3,265,269,level0)
 mush_7 = Mushroom(-5,-3,273,277,level0 )
-enms_1= [mush_1,mush_2,mush_3,mush_4,mush_5,mush_6,mush_7]
+guns_1 = Powerup1(-11,-9,43,46,level0)
+enms_1= [mush_1,mush_2,mush_3,mush_4,mush_5,mush_6,mush_7,guns_1]
 
 obs_1 = Bricks(-9,-7,34,38,level0)
 obs_2 = Bricks(-9,-7,43,47,level0)

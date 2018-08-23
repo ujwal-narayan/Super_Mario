@@ -168,6 +168,12 @@ _castle[2:4,6]="B"
 _castle[0,4:6]="C"
 _castle[1,3:7]="C"
 
+#Powerups 
+
+_powerup1 = np.chararray((2,3))
+_powerup1 [ :,:] = "G"
+_powerup1[-1,-1] = " "
+_powerup1[-1,0] = " "
 
 #enemy1
 
@@ -192,3 +198,5 @@ speed = 1
 jump = 5
 mushroom_speed = 3
 level = 1
+powerup_speed = 5
+reset = False

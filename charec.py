@@ -6,8 +6,9 @@ import board
 import time
 class characters :
     """ Common for all characters """
-    def __init__(self , x, y ,ex , ey,board):
+    def __init__(self , x,ex ,y, ey,board):
         """ Figure out the x and Y shit later """
+
         self._x = x
         self._y = y 
         self.speed = 0 
@@ -18,6 +19,12 @@ class characters :
         self._endy = ey 
         self.struct = ""
         self.killedByEnms = False
+        self.powerup1 = False
+        if config.reset == False :
+            self._cx=x
+            self._cy=y
+            self._cendx = ex
+            self._cendy = ey
     
     def get_coods(self):
         return (self._x,self._y,self._endx,self._endy)
@@ -101,24 +108,57 @@ class characters :
 
     
     def speed_imp(self,board,ch):
+        ret = False
         if ch == 's':
             for i in range(self.speed):
-                self.moveDown(board,ch)
+                a = self.moveDown(board,ch)
+                if a :
+                    ret = True
         if ch == 'd':
             for i in range(self.speed):
-                self.moveRight(board,ch)
+                a = self.moveRight(board,ch)
+                if a :
+                    ret = True
         if ch == 'a':
             for i in range(self.speed):
-                self.moveLeft(board,ch)
+                a = self.moveLeft(board,ch)
+                if a :
+                    ret = True
+        return ret
         
 
+class Powerup1(characters):
+    """" Comrade Mario , unleash the beasts of revolution . Bring forth da GUNS """
+    def __init__(self,x,ex,y,ey,board):
+        super(Powerup1,self).__init__(x,ex,y,ey,board)
+        self.speed = config.powerup_speed
+        self.struct = config._powerup1
+        self.mover = 'd'
+        board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct
+        
 
+    def move(self,board):
+        if self._y == 0 :
+            pass
+        if self.speed_imp(board,'s')  :
+            pass
+        else:
+            if self.mover == 'a':
+                if(self.speed_imp(board,'a')):
+                    pass
+                else:
+                    self.mover = 'd'
+            elif self.mover == 'd':
+                if(self.speed_imp(board,'d')):
+                    pass
+                else:
+                    self.mover = 'a'
 
 
 class Mario(characters) :
     """ issa me , Mario """
-    def __init__(self , x , ex ,y, ey , board,  lives = 1 ):
-        super(Mario, self ).__init__(x,y,ex,ey,board)
+    def __init__(self , x , ex ,y, ey , board,  lives = 3 ):
+        super(Mario, self ).__init__(x,ex,y,ey,board)
         self.lives = lives 
         self.score = 0 
         self.speed = config.speed
@@ -127,8 +167,9 @@ class Mario(characters) :
         self.jumpCounter = 0
         self.damage = 10
         self.killedByEnms = True
+        self.powerup1 = False
         self.struct = config._mario
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct
+        board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct
 
 
     def jumpUp(self,board,direction):
@@ -166,16 +207,16 @@ class Mario(characters) :
 
      
     def move(self,ch , board ):
-       # if ch == 'w' :
-        #    self.moveUp(board,ch)
-        if ch == 's':
-            self.speed_imp(board,ch)
+        if ch == 'w' or ch == 'W':
+           self.jumpUps(board,'j')
+        if ch == 's' or ch == 'S':
+            self.speed_imp(board,'s')
             #self.moveDown(board,ch)
-        elif ch == 'a':
-            self.speed_imp(board,ch)
+        elif ch == 'a' or ch == 'A':
+            self.speed_imp(board,'a')
             #self.moveLeft(board,ch)
-        elif ch == 'd':
-            self.speed_imp(board,ch)
+        elif ch == 'd' or ch == 'D':
+            self.speed_imp(board,'d')
             #self.moveRight(board,ch)
         elif ch == ' ':
             self.jumpUps(board,'j')
@@ -183,22 +224,22 @@ class Mario(characters) :
 class Mushroom(characters) :
     """ Low level easy peasy enimies """
     def __init__(self , x , ex ,y, ey , board,lives = 1):
-        super(Mushroom, self ).__init__(x,y,ex,ey,board)
+        super(Mushroom, self ).__init__(x,ex,y,ey,board)
         self.lives = lives
         self.speed = config.mushroom_speed
         self.struct = config._mushroom
-        board._bufferboard[self._x:self._endx,self._y:self._endy] = self.struct 
+        board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct 
         self.mover = 'a'  
 
 
     def move(self,board):
         if self.mover == 'a':
-            if(self.moveLeft(board)):
+            if(self.speed_imp(board,'a')):
                 pass
             else:
                 self.mover = 'd'
         elif self.mover == 'd':
-            if(self.moveRight(board)):
+            if(self.speed_imp(board,'d')):
                 pass
             else:
                 self.mover = 'a'
@@ -209,7 +250,7 @@ class Mushroom(characters) :
 
 class Turtles(characters):
     """Medium level annoying beasts """
-    def __init__(self, x, y,ex,ey) :
+    def __init__(self, x, ex,y,ey) :
         super(Turtles,self).__init__(x,y,ex,ey)
         self.lives = 1
         self.damage =50
@@ -217,7 +258,7 @@ class Turtles(characters):
 
 class DarthVader(characters):
     """I AM THE SENATE < the big bad boss himself """
-    def __init__(self, x, y,ex,ey,lives = 2):
+    def __init__(self, x, ex,y,ey,lives = 2):
         super(DarthVader , self).__init__(x,y,ex,ey)
         self.damage = 10
         self.lives = 2 
