@@ -11,8 +11,7 @@ _ground = u"\u2588"
 
 _sky = u"\u2588"
 
-
-
+_bricks = u"\u2588"
 '''
 _
 mari = np.chararray((7,137))
@@ -55,12 +54,10 @@ types = {
     #_e3 : "DarthVader"
 }
 # scores
-'''
 scores = {
     _bricks : 20,
     _e1: 100
 }
-'''
 # number of properties per level (0 is debug)
 enemies = []
 
@@ -194,4 +191,4 @@ _turtle[-1,0] = _turtle[-1,-1] = 'l'
 speed = 1
 jump = 5
 mushroom_speed = 3
-level = 0
+level = 1

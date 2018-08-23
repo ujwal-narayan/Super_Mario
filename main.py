@@ -8,7 +8,8 @@ from charec import Mario
 import config
 
 
-board = b.level1
+
+board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1)
 mario = Mario(-6,-3,0,3,board)
 config.level=1
 board.player = mario
@@ -63,10 +64,9 @@ while a=='r':
         timer1 = time.time()
     if time.time() > timer + 0.1 :
         
-        for i in b.enms_1:
+        for i in board.enms:
             i.move(board)
         timer = time.time()
-   
    
 
 if config.level == 2:

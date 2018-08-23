@@ -31,7 +31,8 @@ def move_maadi(self,board,ch):
                         for i in board.enms:
                             if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)):
                                     reset(self,board)
-                                    board.__init__(board.height,board.width,board.endlevel_x,board.endlevel_endx,board.endlevel_y,board.endlevel_endy,board.enms,board.obs,board.player)
+                                    board.__init__(board.height,board.width,board.endlevel_x,board.endlevel_endx,board.endlevel_y,board.endlevel_endy,board.resen,board.resob,board.player)
+                                    board._bufferboard[self._x:self._endx,self._y:self._endy]= self.struct
                                     board.render(self._y-25)
                                     return 2
                 if ( board._bufferboard[row, col ] != ""):
@@ -45,9 +46,11 @@ def move_maadi(self,board,ch):
                         for i in board.enms:
                             if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)):
                                     reset(self,board)
-                                    board.__init__(board.height,board.width,board.endlevel_x,board.endlevel_endx,board.endlevel_y,board.endlevel_endy,board.enms,board.obs,board.player)
+                                    board.__init__(board.height,board.width,board.endlevel_x,board.endlevel_endx,board.endlevel_y,board.endlevel_endy,board.resen,board.resob,board.player)
+                                    board._bufferboard[self._x:self._endx,self._y:self._endy]= self.struct
                                     board.render(self._y-25)
                                     return 2
+
                 if ( board._bufferboard[row, col ] != ""):
                     return 0
 
@@ -61,14 +64,15 @@ def move_maadi(self,board,ch):
     if ( ch == 's'):
         for col in range(self._y,self._endy):
             for row in range(self._endx-1,self._endx):
-                if ( board._bufferboard[row,col] == b"M"):
-                    for i in board.enms:
-                        if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)) and (self.killedByEnms):
-                            board._bufferboard[i._x:i._endx , i._y:i._endy] = ""
-                            board.enms.remove(i)
-                            
-                            break
-                            
+                if (self.killedByEnms):
+                    if ( board._bufferboard[row,col] == b"M"):
+                        for i in board.enms:
+                            if ((self._y <= i._y and self._endy >= i._y) or ( self._endy >= i._endy and self._y <= i._endy)) :
+                                board._bufferboard[i._x:i._endx , i._y:i._endy] = ""
+                                board.enms.remove(i)  
+                                move_maadi(self,board,ch)
+                                board.render(self._y-25 )
+                                return 1                     
                 if ( board._bufferboard[row, col ] != ""):
                     self.timeSinceLastJump = 10
                     return 0
@@ -92,6 +96,7 @@ def animate(self,board):
     self._endx=board.endlevel_endx
     board.render(self._y)
     config.level +=1 
+    
 
 def reset(self,board):
    
@@ -99,11 +104,6 @@ def reset(self,board):
     self._endy=board.mariospawn_endy
     self._x = board.mariospawn_x
     self._endx=board.mariospawn_endx
-    
-    
-   
-
-
-    
+    self.lives -= 1
     
 
