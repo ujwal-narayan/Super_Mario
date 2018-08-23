@@ -47,6 +47,13 @@ def move_maadi(self,board,ch):
                 
                 else :
                     if ( board._bufferboard[row,col] == b"@" or board._bufferboard[row,col] == b"|" or board._bufferboard[row,col] == b"/" or board._bufferboard[row,col] == b"\\"):
+                        if self.powerup1 :
+                            board.player.powerup1 = True
+                            for i in board.enms :
+                                if i._y == self._y and i._endy == self._endy:
+                                    board._bufferboard[i._x:i._endx , i._y+1:i._endy+1] = ""
+                                    board.enms.remove(i)
+                            return 3
                         rtrn = reset(board.player,board,'a')
                         if rtrn == 1:
                             return 2
@@ -76,6 +83,13 @@ def move_maadi(self,board,ch):
                                 return 1                
                 else :
                     if ( board._bufferboard[row,col] == b"@" or board._bufferboard[row,col] == b"|" or board._bufferboard[row,col] == b"/" or board._bufferboard[row,col] == b"\\"):
+                        if self.powerup1 :
+                            board.player.powerup1 = True
+                            for i in board.enms :
+                                if i._y == self._y and i._endy == self._endy:
+                                    board._bufferboard[i._x:i._endx , i._y-1:i._endy-1] = ""
+                                    board.enms.remove(i)
+                            return 3    
                         rtrn = reset(board.player,board,'d')
                         if rtrn == 1:
                             return 2

@@ -134,6 +134,7 @@ class Powerup1(characters):
         self.speed = config.powerup_speed
         self.struct = config._powerup1
         self.mover = 'd'
+        self.powerup1 = True
         board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct
         
 
