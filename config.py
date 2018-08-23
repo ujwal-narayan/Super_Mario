@@ -168,6 +168,9 @@ _castle[2:4,6]="B"
 _castle[0,4:6]="C"
 _castle[1,3:7]="C"
 
+#pits
+_pits = np.chararray((3,4))
+_pits [:,:]= "0"
 #Powerups 
 
 _powerup1 = np.chararray((2,3))
@@ -184,12 +187,22 @@ _mushroom[-1,-1] = " "
 
 #enemy2
 
-_turtle = np.chararray((3,3))
-_turtle[:,:]=""
-_turtle[0,1]= _turtle[1,0] = _turtle[1,-1] = '0'
-_turtle[-1,0] = _turtle[-1,-1] = 'l'
+_turtle = np.chararray((2,4))
+_turtle[:,:]="0"
+_turtle[1,0] = " "
+_turtle [ -1,-1] = " "
 
 #enemy3
+
+_darthvader = np.chararray((2,4))
+_darthvader [ :,:] = "8"
+_darthvader [1,0] = " "
+_darthvader [-1,-1] = " "
+
+
+#coins
+_coins  = np.chararray((1,1))
+_coins [:,:] = "c"
 
 
 

@@ -251,11 +251,21 @@ class Mushroom(characters) :
 
 class Turtles(characters):
     """Medium level annoying beasts """
-    def __init__(self, x, ex,y,ey) :
-        super(Turtles,self).__init__(x,y,ex,ey)
+    def __init__(self, x, ex,y,ey,board,lives=1) :
+        super(Turtles,self).__init__(x,ex,y,ey,board)
         self.lives = 1
         self.damage =50
-        self.speed = 10
+        self.speed = config.mushroom_speed
+        self.struct = config._turtle
+        board._bufferboard[self._cx:self._cendx,self._cy:self._cendy] = self.struct 
+
+
+    def move (self,board):
+       
+        if  self._y > board.player._y :
+            self.speed_imp(board,'a')
+        else:
+            self.speed_imp(board,'d')
 
 class DarthVader(characters):
     """I AM THE SENATE < the big bad boss himself """
@@ -335,7 +345,21 @@ class Castle(Obstacles):
         board._bufferboard[self._x:self._endx,
                            self._y:self._endy] = self.struct
 
+class Pits(Obstacles):
+    ''' One way ticket to Tartarus  '''
+    def __init__(self,x,ex,y,ey,board):
+        super(Pits,self).__init__(x,ex,y,ey,board)
+        self.struct=config._pits
+        board._bufferboard[self._x:self._endx,
+                           self._y:self._endy] = self.struct
 
 
-
+class Coins():
+    """ MONEEEEE , gimme mone Jai jai money"""
+    def __init__(self,x,y, board):
+        self._x = x
+        self._y = y
+        self.struct = config._coins
+        board._bufferboard[self._x:self._x+1,self._y:self._y+1] = self.struct
+        
 

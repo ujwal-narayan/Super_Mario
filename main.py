@@ -9,7 +9,7 @@ import config
 
 
 
-board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1)
+board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1,b.coins)
 mario = Mario(-6,-3,0,3,board)
 config.level=1
 board.player = mario
@@ -56,7 +56,6 @@ while a=='r':
     print(mario.get_coods())
     print(b.guns_1._cendx)
 
-    time.sleep(00.02)
     if time.time() > timer1 :
         if(mario._endx < -3 ):
             mario.move('s',board)
@@ -71,11 +70,12 @@ while a=='r':
     print(p_input)
     print(mario.powerup1)
 
+
+
 if config.level == 2:
     print("MOVING TO LEVEL 2 ")
     time.sleep(1)
-    board = b.level2
-    mario = Mario(-6,-3,320,323,board)  
+    board= b.Board(20,500,-6,-3,342,345,b.enms_1,b.obs1,mario)
 
     while a=='r':
     
@@ -88,23 +88,33 @@ if config.level == 2:
 
     
 
+            
         mario.move(p_input , board)
         board.render((mario._y - 25))
         #board.printer(0,20,0,190)
         print(mario.get_coods())
-        print(p_input)
+        print(b.guns_1._cendx)
 
-        time.sleep(0.02)
-        if(mario._endx < -3 ):
-            mario.move('s',board)
-        mario.timeSinceLastJump += 1
-        
-        
+        time.sleep(00.02)
+        if time.time() > timer1 :
+            if(mario._endx < 0 ):
+                mario.move('s',board)
+            mario.timeSinceLastJump += 1
+            print(mario.timeSinceLastJump)
+            timer1 = time.time()
+        if time.time() > timer + 1 :
+            
+            for i in board.enms:
+                i.move(board)
+            timer = time.time()
+        print(p_input)
+        print(mario.powerup1)
+
     
-os.system('clear')
-if quit_val == 0:
-    print("Quitting ")
-    exit()
+    os.system('clear')
+    if quit_val == 0:
+        print("Quitting ")
+        exit()
 
 
     

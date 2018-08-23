@@ -5,13 +5,13 @@ from os import system
 import config
 from colorama import init,Fore,Back,Style
 import sys
-from charec import Mushroom , Turtles , DarthVader,Pipes,Flagpost,BigPipes,Bricks,Castle,SldingPipes,ZigZagWall,Powerup1
+from charec import Mushroom , Turtles , DarthVader,Pipes,Flagpost,BigPipes,Bricks,Castle,SldingPipes,ZigZagWall,Powerup1 , Pits , Coins
 import time
 init(autoreset=True)
 class Board:
     """ Its the board and scene gen classs """
 
-    def __init__(self, m, n,ex=0,eex=0,ey=0,eey=0,enemy = [] , obsta = [] , player = 0 ,mx=-6,mex=-3,my=0,mey=3  ):
+    def __init__(self, m, n,ex=0,eex=0,ey=0,eey=0,enemy = [] , obsta = [] ,coins = [], player = 0 ,mx=-6,mex=-3,my=0,mey=3  ):
         """ preferred size = (FILL IT LATER) """
         assert isinstance(m, int) == True
         assert isinstance(n, int) == True
@@ -30,6 +30,7 @@ class Board:
         self.endlevel_endx=eex
         self.enms = enemy + []
         self.obs = obsta + []
+        self.coins = coins
         self.mariospawn_x = mx
         self.mariospawn_endx = mex 
         self.mariospawn_y = my
@@ -41,6 +42,8 @@ class Board:
             i.__init__(i._cx,i._cendx,i._cy,i._cendy,self)
         for i in self.obs:
             i.__init__(i._x,i._endx,i._y,i._endy,self)
+        for i in self.coins:
+            i.__init__(i._x,i._y,self)
 
         
 
@@ -66,6 +69,8 @@ class Board:
        
         # assigning the ground
         self._bufferboard[-3:,:] = "g"#config._ground
+        if config.level == 2 :
+            self._bufferboard[-3:,76:83] =""
      
 
         #assigning mario 
@@ -93,7 +98,7 @@ class Board:
         for row in range(20):
             for col in range(y,y+100 ):
                 try:
-                    sys.stdout.write(getcc(self._bufferboard[row,col]))
+                    sys.stdout.write(getcc(self,self._bufferboard[row,col]))
                 except BaseException:
                     sys.stdout.write(self._bufferboard[row, col].decode())
             sys.stdout.write("\n")
@@ -103,7 +108,7 @@ class Board:
 #put it in config and import later  
 
 
-def getcc (ch):
+def getcc (self,ch):
     if ch == "" :
         return (Back.BLUE + " " )
     elif ch == b'-':
@@ -113,12 +118,20 @@ def getcc (ch):
     elif ch == b'M':
         return Back.BLUE + "M"
     elif ch == b'\\':
+        if self.player.powerup1:
+            return Fore.RED +  Back.BLUE + "\\"
         return  Back.BLUE + "\\"
     elif ch == b'/':
+        if self.player.powerup1:
+            return Fore.RED +  Back.BLUE + "/"
         return  Back.BLUE + "/"
     elif ch == b'@':
+        if self.player.powerup1:
+            return Fore.RED +  Back.BLUE + "@"
         return Back.BLUE + "@"
     elif ch == b'|':
+        if self.player.powerup1:
+            return Fore.RED +  Back.BLUE + "|"
         return Back.BLUE + "|"
     elif ch ==b"g":
         return Fore.GREEN +     '\u2588' 
@@ -132,8 +145,6 @@ def getcc (ch):
         return Back.BLUE+ Fore.GREEN+ u"\u2503"
     elif ch == b"M":
         return "M"
-    elif ch == b"0":
-        return "0"
     elif ch == b"l":
         return Back.BLUE + "|"
     elif ch == b'W':
@@ -144,6 +155,10 @@ def getcc (ch):
         return Fore.BLACK + u"\u2591"
     elif ch == b"G":
         return Fore.CYAN + Back.BLUE+ 'O'
+    elif ch == b"0":
+        return Back.BLUE + '0'
+    elif ch == b"c":
+        return Back.BLUE + Fore.YELLOW +  	 	u"\U0001F4B0"
 
 
    
@@ -209,7 +224,8 @@ obs_7 = Bricks(-9,-7,106,110,level0)
 obs_8 = Bricks(-9,-7,110,114,level0)
 obs_9 = Bricks(-9,-7,114,118,level0)
 obs_10 = BigPipes(-9,-3,150,158,level0)
-obs_11 = SldingPipes(-9,-3,200,210,level0)
+obs_18 = SldingPipes(-9,-3,200,210,level0)
+obs_19 = Pipes(-7,-3,238,246,level0)
 obs_11 = Bricks(-9,-7,260,264,level0)
 obs_12 = Bricks(-9,-7,264,268,level0)
 obs_13 = Bricks(-9,-7,268,272,level0)
@@ -217,7 +233,7 @@ obs_14 = Bricks(-9,-7,272,276,level0)
 obs_15 = ZigZagWall(-13,-3,300,314,level0)
 obs_16 = Flagpost(-13,-3,328,330,level0)
 obs_17 = Castle (-11,-3,338,348,level0)
-obs1 = [obs_1,obs_2,obs_3,obs_4,obs_5,obs_6,obs_7,obs_8,obs_9,obs_10,obs_11,obs_12,obs_13,obs_14,obs_15,obs_16,obs_17]
+obs1 = [obs_1,obs_2,obs_3,obs_4,obs_5,obs_6,obs_7,obs_8,obs_9,obs_10,obs_11,obs_12,obs_13,obs_14,obs_15,obs_16,obs_17,obs_18,obs_19]
 
 
 
@@ -254,5 +270,28 @@ level1._bufferboard[-13:-3,328:330] = config._flagpost
 level1._bufferboard[-11:-3,338:348] = config._castle
 '''
 
-level2 = Board(20,500)
+t1 = Turtles(-5,-3,33,37,level0)
+t2 = Turtles(-5,-3,137,141,level0)
+'''
+enms_1.append(t1)
+enms_1.append(t2)
+enms_1.remove(mush_1)
+enms_1.remove(mush_2)
+'''
+obs_1 = Bricks(-9,-7,34,38,level0)
+obs_2 = Bricks(-9,-7,43,47,level0)
+obs_3 = Bricks(-9,-7,47,51,level0)
+obs_4 = Bricks(-9,-7,51,55,level0)
+obs_4 = Bricks(-9,-7,55,59,level0)
+obs_5 = Pipes(-7,-3,66,74,level0)
+obs_6 = BigPipes(-9,-3,90,98,level0)
+obs_7 = Bricks(-9,-7,106,110,level0)
+obs_8 = Bricks(-9,-7,110,114,level0)
+obs_9 = Bricks(-9,-7,114,118,level0)
+obs_20 = Pits(-4,-1,30,34,level0)
 
+
+c1 =Coins(-7,1,level0)
+c2 = Coins(-7,4,level0)
+c3 = Coins(-7,6,level0)
+coins = [c1,c2,c3]
