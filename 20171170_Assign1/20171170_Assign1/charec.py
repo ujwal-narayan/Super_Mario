@@ -25,6 +25,7 @@ class Characters:
             self.current_y = y
             self.cendx = ex
             self.cendy = ey
+        del board
 
     def get_coods(self):
         """ get the co-ordinates """
