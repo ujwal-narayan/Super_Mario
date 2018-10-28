@@ -247,37 +247,7 @@ OBS1 = [OBS_1, OBS_2, OBS_3, OBS_4, OBS_5, OBS_6, OBS_7, OBS_8, OBS_9, OBS_10,
 ENMS_2 = ENMS_1 + []
 OBS2 = OBS1 + []
 
-'''
-#defining level 1
-#level1.bufferboard[-5:-3,28:32 ]=e1
-level1.bufferboard[-9:-7,34:38] = config.brickwalls
-level1.bufferboard[-9:-7,43:47] = config.brickwalls
-level1.bufferboard[-9:-7,47:51] = config.brickwalls
-level1.bufferboard[-9:-7,51:55] = config.brickwalls
-level1.bufferboard[-7:-3,66:74] = config.pipes
-level1.bufferboard[-9:-3,90:98] = config.bigpipes
-#level1.bufferboard[-5:-3,105:109 ]=config.mushroom
-level1.bufferboard[-9:-7,106:110] = config.brickwalls
-level1.bufferboard[-9:-7,110:114] = config.brickwalls
-level1.bufferboard[-9:-7,114:118] = config.brickwalls
-level1.bufferboard[-9:-3,150:158] = config.bigpipes
-#level1.bufferboard[-5:-3,170:174 ]=config.mushroom
-#level1.bufferboard[-5:-3,176:180 ]=config.mushroom
-level1.bufferboard[-9:-3,200:210] = config.goingdownpipe
-#level1.bufferboard[-5:-3,220:224 ]=config.mushroom
-level1.bufferboard[-7:-3,238:246] = config.pipes
-level1.bufferboard[-9:-7,260:264] = config.brickwalls
-level1.bufferboard[-9:-7,264:268] = config.brickwalls
-level1.bufferboard[-9:-7,268:272] = config.brickwalls
-level1.bufferboard[-9:-7,272:276] = config.brickwalls
-level1.bufferboard[-9:-7,284:288] = config.brickwalls
-level1.bufferboard[-9:-7,280:284] = config.brickwalls
-#level1.bufferboard[-5:-3,265:269 ]=config.mushroom
-#level1.bufferboard[-5:-3,273:277 ]=config.mushroom
-level1.bufferboard[-13:-3,300:314] = config.zigzagwall
-level1.bufferboard[-13:-3,328:330] = config.flagpost
-level1.bufferboard[-11:-3,338:348] = config.castle
-'''
+
 
 T1 = Turtles(-5, -3, 33, 37, LEVEL0)
 T2 = Turtles(-5, -3, 137, 141, LEVEL0)

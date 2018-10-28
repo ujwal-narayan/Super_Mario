@@ -4,7 +4,7 @@ import config
 
 
 def move_maadi(self, board, charac):
-
+    """ Possibility of Move """
     if (self.x_pos or self.endx) < -20:
         return 0
 
@@ -198,13 +198,13 @@ def animate(self, board):
     self.x_pos = board.endlevelx
     self.endx = board.endlevelendx
     board.render(self.y_pos)
-    config.level += 1
+    config.LEVEL += 1
     time.sleep(1)
     self.x_pos = -6
     self.endx = -3
     self.y_pos = 0
     self.endy = 3
-    if config.level == 3:
+    if config.LEVEL == 3:
         print()
         print("GAME OVER < YOU WON > ")
         print("Score:", end=" ")

@@ -274,27 +274,27 @@ class Turtles(Characters):
             self.speed_imp(board, 'd')
 
 
-class DarthVader(Characters):
-    """I AM THE SENATE .the big bad boss himself """
+# class DarthVader(Characters):
+#     """I AM THE SENATE .the big bad boss himself """
 
-    def __init__(self, x, ex, y, ey, board, lives=3):
-        super(DarthVader, self).__init__(x, ex, y, ey, board)
-        self.damage = 10
-        self.lives = lives
-        self.speed = 10
-        self.struct = config.darthvader
-        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
+#     def __init__(self, x, ex, y, ey, board, lives=3):
+#         super(DarthVader, self).__init__(x, ex, y, ey, board)
+#         self.damage = 10
+#         self.lives = lives
+#         self.speed = 10
+#         self.struct = config.darthvader
+#         board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
-    def move(self, board):
-        """ Function to implement move """
-        if board.player.endx < -3:
-            self.y_pos = board.player.y_pos + 1
-            self.endy = board.player.endy + 1
-        else:
-            if self.y_pos > board.player.y_pos:
-                self.speed_imp(board, 'a')
-            else:
-                self.speed_imp(board, 'd')
+#     def move(self, board):
+#         """ Function to implement move """
+#         if board.player.endx < -3:
+#             self.y_pos = board.player.y_pos + 1
+#             self.endy = board.player.endy + 1
+#         else:
+#             if self.y_pos > board.player.y_pos:
+#                 self.speed_imp(board, 'a')
+#             else:
+#                 self.speed_imp(board, 'd')
 
 
 class Obstacles:
