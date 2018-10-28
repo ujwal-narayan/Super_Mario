@@ -91,109 +91,109 @@ class Board:
 # put it in config and import later
 
 
-def getcc(self, charecter):
+def getcc(self, character):
     if config.level == 2:
-        if charecter == "":
+        if character == "":
             return Back.LIGHTWHITE_EX + " "
-        elif charecter == b'-':
+        elif character == b'-':
             return Back.LIGHTWHITE_EX + u"\u25AC"
-        elif charecter == b'+':
+        elif character == b'+':
             return "#"
-        elif charecter == b'M':
+        elif character == b'M':
             return Back.LIGHTWHITE_EX + "M"
-        elif charecter == b'\\':
+        elif character == b'\\':
             if self.player.powerup1:
                 return Fore.RED + Back.LIGHTWHITE_EX + "\\"
             return Back.LIGHTWHITE_EX + "\\"
-        elif charecter == b'/':
+        elif character == b'/':
             if self.player.powerup1:
                 return Fore.RED + Back.LIGHTWHITE_EX + "/"
             return Back.LIGHTWHITE_EX + "/"
-        elif charecter == b'@':
+        elif character == b'@':
             if self.player.powerup1:
                 return Fore.RED + Back.LIGHTWHITE_EX + "@"
             return Back.LIGHTWHITE_EX + "@"
-        elif charecter == b'|':
+        elif character == b'|':
             if self.player.powerup1:
                 return Fore.RED + Back.LIGHTWHITE_EX + "|"
             return Back.LIGHTWHITE_EX + "|"
-        elif charecter == b"g":
+        elif character == b"g":
             return Fore.GREEN + '\u2588'
-        elif charecter == b"s":
+        elif character == b"s":
             return Fore.LIGHTWHITE_EX + '\u2588'
-        elif charecter == b"_":
+        elif character == b"_":
             return Fore.LIGHTGREEN_EX + Back.LIGHTWHITE_EX + u"\u25AC"
-        elif charecter == b"b":
+        elif character == b"b":
             return Fore.BLACK+Back.LIGHTRED_EX + u"\u2591"
-        elif charecter == b"p":
+        elif character == b"p":
             return Back.LIGHTWHITE_EX + Fore.GREEN + u"\u2503"
-        elif charecter == b"M":
+        elif character == b"M":
             return "M"
-        elif charecter == b"l":
+        elif character == b"l":
             return Back.LIGHTWHITE_EX + "|"
-        elif charecter == b'W':
+        elif character == b'W':
             return Fore.BLACK+Back.LIGHTRED_EX + u"\u2591"
-        elif charecter == b"C":
+        elif character == b"C":
             return Back.MAGENTA + u"\u2591"
-        elif charecter == b"B":
+        elif character == b"B":
             return Fore.BLACK + u"\u2591"
-        elif charecter == b"G":
+        elif character == b"G":
             return Fore.CYAN + Back.LIGHTWHITE_EX + 'O'
-        elif charecter == b"0":
+        elif character == b"0":
             return Back.LIGHTWHITE_EX + '0'
-        elif charecter == b"c":
+        elif character == b"c":
             return Back.LIGHTWHITE_EX + Fore.YELLOW + u"\U0001F4B0"
 
     else:
-        if charecter == "":
+        if character == "":
             return Back.BLUE + " "
-        elif charecter == b'-':
+        elif character == b'-':
             return Back.BLUE + u"\u25AC"
-        elif charecter == b'+':
+        elif character == b'+':
             return "#"
-        elif charecter == b'M':
+        elif character == b'M':
             return Back.BLUE + "M"
-        elif charecter == b'\\':
+        elif character == b'\\':
             if self.player.powerup1:
                 return Fore.RED + Back.BLUE + "\\"
             return Back.BLUE + "\\"
-        elif charecter == b'/':
+        elif character == b'/':
             if self.player.powerup1:
                 return Fore.RED + Back.BLUE + "/"
             return Back.BLUE + "/"
-        elif charecter == b'@':
+        elif character == b'@':
             if self.player.powerup1:
                 return Fore.RED + Back.BLUE + "@"
             return Back.BLUE + "@"
-        elif charecter == b'|':
+        elif character == b'|':
             if self.player.powerup1:
                 return Fore.RED + Back.BLUE + "|"
             return Back.BLUE + "|"
-        elif charecter == b"g":
+        elif character == b"g":
             return Fore.GREEN + '\u2588'
-        elif charecter == b"s":
+        elif character == b"s":
             return Fore.BLUE + '\u2588'
-        elif charecter == b"_":
+        elif character == b"_":
             return Fore.LIGHTGREEN_EX + Back.BLUE + u"\u25AC"
-        elif charecter == b"b":
+        elif character == b"b":
             return Fore.BLACK+Back.LIGHTRED_EX + u"\u2591"
-        elif charecter == b"p":
+        elif character == b"p":
             return Back.BLUE + Fore.GREEN + u"\u2503"
-        elif charecter == b"M":
+        elif character == b"M":
             return "M"
-        elif charecter == b"l":
+        elif character == b"l":
             return Back.BLUE + "|"
-        elif charecter == b'W':
+        elif character == b'W':
             return Fore.BLACK+Back.LIGHTRED_EX + u"\u2591"
-        elif charecter == b"C":
+        elif character == b"C":
             return Back.MAGENTA + u"\u2591"
-        elif charecter == b"B":
+        elif character == b"B":
             return Fore.BLACK + u"\u2591"
-        elif charecter == b"G":
+        elif character == b"G":
             return Fore.CYAN + Back.BLUE + 'O'
-        elif charecter == b"0":
+        elif character == b"0":
             return Back.BLUE + '0'
-        elif charecter == b"c":
+        elif character == b"c":
             return Back.BLUE + Fore.YELLOW + u"\U0001F4B0"
 
 

@@ -112,22 +112,22 @@ class Characters:
             self.endy = oendy
             return False
 
-    def speed_imp(self, board, charecter):
+    def speed_imp(self, board, character):
         """ Function to implement multiple speeds """
         ret = False
-        if charecter == 's':
+        if character == 's':
             for _ in range(self.speed):
-                speed_var = self.move_down(board, charecter)
+                speed_var = self.move_down(board, character)
                 if speed_var:
                     ret = True
-        if charecter == 'd':
+        if character == 'd':
             for _ in range(self.speed):
-                speed_var = self.move_right(board, charecter)
+                speed_var = self.move_right(board, character)
                 if speed_var:
                     ret = True
-        if charecter == 'a':
+        if character == 'a':
             for _ in range(self.speed):
-                speed_var = self.move_left(board, charecter)
+                speed_var = self.move_left(board, character)
                 if speed_var:
                     ret = True
         return ret
@@ -209,25 +209,25 @@ class Mario(Characters):
             self.endy = oendy
             return False
 
-    def jump_ups(self, board, charecter):
+    def jump_ups(self, board, character):
         """ Function to implement multiple jumps """
         for _ in range(self.jump):
-            self.jump_up(board, charecter)
+            self.jump_up(board, character)
 
-    def move(self, charecter, board):
+    def move(self, character, board):
         """ Function to implement move """
-        if charecter == 'w' or charecter == 'W':
+        if character == 'w' or character == 'W':
             self.jump_ups(board, 'j')
-        if charecter == 's' or charecter == 'S':
+        if character == 's' or character == 'S':
             self.speed_imp(board, 's')
-            # self.move_down(board,charecter)
-        elif charecter == 'a' or charecter == 'A':
+            # self.move_down(board,character)
+        elif character == 'a' or character == 'A':
             self.speed_imp(board, 'a')
-            # self.move_left(board,charecter)
-        elif charecter == 'd' or charecter == 'D':
+            # self.move_left(board,character)
+        elif character == 'd' or character == 'D':
             self.speed_imp(board, 'd')
-            # self.move_right(board,charecter)
-        elif charecter == ' ':
+            # self.move_right(board,character)
+        elif character == ' ':
             self.jump_ups(board, 'j')
 
 

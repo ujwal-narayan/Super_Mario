@@ -14,9 +14,9 @@ ALLOWEDINPUTS = {
 
 def get_key(key):
     """ Check if it's a valid input or not"""
-    for input_charecter_result in ALLOWEDINPUTS:
-        if key in ALLOWEDINPUTS[input_charecter_result]:
-            return input_charecter_result
+    for input_character_result in ALLOWEDINPUTS:
+        if key in ALLOWEDINPUTS[input_character_result]:
+            return input_character_result
     return INVALID
 
 
@@ -49,10 +49,10 @@ class _GetchUnix:
         old_settings = termios.tcgetattr(fedvar)
         try:
             tty.setraw(sys.stdin.fileno())
-            charecter = sys.stdin.read(1)
+            character = sys.stdin.read(1)
         finally:
             termios.tcsetattr(fedvar, termios.TCSADRAIN, old_settings)
-        return charecter
+        return character
 
 
 # class _GetchWindows:
