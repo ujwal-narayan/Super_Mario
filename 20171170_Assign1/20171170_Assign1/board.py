@@ -1,3 +1,4 @@
+""" The board """
 from os import system
 import sys
 import numpy as np
@@ -48,9 +49,6 @@ class Board:
 
         self.init_board()
 
-        # This stores a list of all the enemies and coins
-        
-        # Stores the player.Try multiplayer uing threading if there's time
         self.players = []
 
     def init_board(self, reset=False):
@@ -59,18 +57,18 @@ class Board:
             self.framecounter = 0
 
         # assigning the ground
-        self.bufferboard[-3:, :] = "g"  # config._ground
-        if config.level == 2:
+        self.bufferboard[-3:, :] = "g"  # config.GROUND
+        if config.LEVEL == 2:
             self.bufferboard[-3:, 76:83] = ""
             self.bufferboard[-3:, 137:142] = ""
 
-        # assigning mario
+        # assigning MARIO
         # put it in config and import later
 
-        #self.bufferboard[-6:-3,:3]= mario
+        #self.bufferboard[-6:-3,:3]= MARIO
 
     def render(self, y_coordinate):
-        # display board at every frame
+        """ display board at every frame """
         sys.stdout.flush()
         try:
             system('clear')
@@ -92,7 +90,8 @@ class Board:
 
 
 def getcc(self, charecter):
-    if config.level == 2:
+    """ Prints the right character """
+    if config.LEVEL == 2:
         if charecter == "":
             return Back.LIGHTWHITE_EX + " "
         elif charecter == b'-':

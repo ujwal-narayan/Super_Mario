@@ -20,7 +20,7 @@ class Characters:
         self.struct = ""
         self.killed_by_enms = False
         self.powerup1 = False
-        if config.reset is False:
+        if config.RESET is False:
             self.current_x = x
             self.current_y = y
             self.cendx = ex
@@ -137,8 +137,8 @@ class Powerup1(Characters):
 
     def __init__(self, x, ex, y, ey, board):
         super(Powerup1, self).__init__(x, ex, y, ey, board)
-        self.speed = config.powerup_speed
-        self.struct = config.powerup1
+        self.speed = config.POWERUP_SPEED
+        self.struct = config.POWERUP1
         self.mover = 'd'
         self.powerup1 = True
         board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
@@ -169,14 +169,14 @@ class Mario(Characters):
         super(Mario, self).__init__(x, ex, y, ey, board)
         self.lives = lives
         self.score = 0
-        self.speed = config.speed
-        self.jump = config.jump
+        self.speed = config.SPEED
+        self.jump = config.JUMP
         self.time_since_last_jump = 100
         self.jump_counter = 0
         self.damage = 10
         self.killed_by_enms = True
         self.powerup1 = False
-        self.struct = config.mario
+        self.struct = config.MARIO
         board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
     def jump_up(self, board, direction):
@@ -236,8 +236,8 @@ class Mushroom(Characters):
     def __init__(self, x, ex, y, ey, board, lives=1):
         super(Mushroom, self).__init__(x, ex, y, ey, board)
         self.lives = lives
-        self.speed = config.mushroom_speed
-        self.struct = config.mushroom
+        self.speed = config.MUSHROOM_SPEED
+        self.struct = config.MUSHROOM
         board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
         self.mover = 'a'
 
@@ -262,8 +262,8 @@ class Turtles(Characters):
         super(Turtles, self).__init__(x, ex, y, ey, board)
         self.lives = lives
         self.damage = 50
-        self.speed = config.mushroom_speed
-        self.struct = config.turtle
+        self.speed = config.MUSHROOM_SPEED
+        self.struct = config.TURTLE
         board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
     def move(self, board):
@@ -314,7 +314,7 @@ class Pipes(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Pipes, self).__init__(x, ex, y, ey, board)
-        self.struct = config.pipes
+        self.struct = config.PIPES
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -323,7 +323,7 @@ class BigPipes(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(BigPipes, self).__init__(x, ex, y, ey, board)
-        self.struct = config.bigpipes
+        self.struct = config.BIGPIPES
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -332,7 +332,7 @@ class SldingPipes(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(SldingPipes, self).__init__(x, ex, y, ey, board)
-        self.struct = config.goingdownpipe
+        self.struct = config.GOINGDOWNPIPE
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -341,7 +341,7 @@ class Bricks(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Bricks, self).__init__(x, ex, y, ey, board)
-        self.struct = config.brickwalls
+        self.struct = config.BRICKWALLS
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -350,7 +350,7 @@ class Flagpost(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Flagpost, self).__init__(x, ex, y, ey, board)
-        self.struct = config.flagpost
+        self.struct = config.FLAGPOST
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -359,7 +359,7 @@ class ZigZagWall(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(ZigZagWall, self).__init__(x, ex, y, ey, board)
-        self.struct = config.zigzagwall
+        self.struct = config.ZIGZAGWALL
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -368,7 +368,7 @@ class Castle(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Castle, self).__init__(x, ex, y, ey, board)
-        self.struct = config.castle
+        self.struct = config.CASTLE
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -377,7 +377,7 @@ class Pits(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Pits, self).__init__(x, ex, y, ey, board)
-        self.struct = config.pits
+        self.struct = config.PITS
         board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
 
 
@@ -387,5 +387,5 @@ class Coins():
     def __init__(self, x, y, board):
         self.x_pos = x
         self.y_pos = y
-        self.struct = config.coins
+        self.struct = config.COINS
         board.bufferboard[self.x_pos:self.x_pos+1, self.y_pos:self.y_pos+1] = self.struct

@@ -261,5 +261,5 @@ def reset(self, board, charac):
     board.coins, board.player)
     board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = self.struct
     board.render(self.y_pos-25)
-    config.reset = True
+    config.RESET = True
     return 1

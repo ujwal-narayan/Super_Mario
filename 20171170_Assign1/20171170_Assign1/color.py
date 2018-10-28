@@ -1,3 +1,4 @@
+""" List of colour codes """
 CURL = '\33[4m'
 CBLINK = '\33[5m'
 CBLINK2 = '\33[6m'
