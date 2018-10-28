@@ -15,6 +15,7 @@ The game has been tested only on Linux based operating systems, may not work on 
 	- `pip install -r requirements.txt`
 - Running the game using python3
 	- `python3 game.py`
+- Runs on Unix Machines . Modify the input.py by uncommenting the ones out for Windows machines.
 
 ### GamePlay
 
@@ -53,8 +54,6 @@ It is also pep8 compliant
 
 ## Changes made 
 
-### `Board.py`
-
 ### Pylint Changes 
 
 + Changed variable names to pep8 conventions
@@ -63,5 +62,7 @@ It is also pep8 compliant
 + Fixed the invalid names 
 + Followed the proper name conventions for variables 
 + Fixed acess to protected class 
+
+A few errors were locally disabled. One was too-few-public-class.While understandable that Classes must not be used to store data , often it is the best method to use for your needs as is the case here. Rather than adding few useless public methods which would only result in obsfucating the code , the errors were locally disabled.Another error that was disabled was the import error as you would have to configure the path for the pacakges in pylint correctly.`msvcrt` is needed only for windows and as it is not essential for unix systems it is not mentioned in the requirements. 
 
 Pylint score : 9.06 

@@ -14,7 +14,7 @@ def move_maadi(self, board, ch):
 #    if board == b.level1:
     for row in range(self.x, self.endx):
         for col in range(self.endy-1, self.endy):
-            if (board._bufferboard[row, col] == b"l"):
+            if (board.bufferboard[row, col] == b"l"):
                 self.y += 5
                 self.endy += 5
                 animate(self, board)
@@ -24,8 +24,8 @@ def move_maadi(self, board, ch):
         for row in range(self.x, self.endx):
             for col in range(self.y, self.y + 1):
                 if (self.killed_by_enms):
-                    if (board._bufferboard[row, col] == b"M" or board._bufferboard[row, col] == b'0'):
-                        if board._bufferboard[row, col] == b"M":
+                    if (board.bufferboard[row, col] == b"M" or board.bufferboard[row, col] == b'0'):
+                        if board.bufferboard[row, col] == b"M":
                             board.player.score += 10
                         else:
                             board.player.score += 30
@@ -36,10 +36,10 @@ def move_maadi(self, board, ch):
                                     return 2
                                 else:
                                     return 1
-                    if (board._bufferboard[row, col] == b"G"):
+                    if (board.bufferboard[row, col] == b"G"):
                         for i in board.enms:
                             if ((self.y >= i.y and self.endy >= i.y) or (self.endy <= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 self.powerup1 = True
@@ -47,12 +47,12 @@ def move_maadi(self, board, ch):
                                 return 1
 
                 else:
-                    if (board._bufferboard[row, col] == b"@" or board._bufferboard[row, col] == b"|" or board._bufferboard[row, col] == b"/" or board._bufferboard[row, col] == b"\\"):
+                    if (board.bufferboard[row, col] == b"@" or board.bufferboard[row, col] == b"|" or board.bufferboard[row, col] == b"/" or board.bufferboard[row, col] == b"\\"):
                         if self.powerup1:
                             board.player.powerup1 = True
                             for i in board.enms:
                                 if i.y == self.y and i.endy == self.endy:
-                                    board._bufferboard[i.x:i.endx,
+                                    board.bufferboard[i.x:i.endx,
                                                        i.y+1:i.endy+1] = ""
                                     board.enms.remove(i)
                                 board.player.powerup1 = False
@@ -62,15 +62,15 @@ def move_maadi(self, board, ch):
                             return 2
                         else:
                             return 1
-                if (board._bufferboard[row, col] != ""):
+                if (board.bufferboard[row, col] != ""):
                     return 0
 
     if (ch == 'd'):
         for row in range(self.x, self.endx):
             for col in range(self.endy-1, self.endy):
                 if (self.killed_by_enms):
-                    if (board._bufferboard[row, col] == b"M" or board._bufferboard[row, col] == b'0'):
-                        if board._bufferboard[row, col] == b"M":
+                    if (board.bufferboard[row, col] == b"M" or board.bufferboard[row, col] == b'0'):
+                        if board.bufferboard[row, col] == b"M":
                             board.player.score += 10
                         else:
                             board.player.score += 30
@@ -81,22 +81,22 @@ def move_maadi(self, board, ch):
                                     return 2
                                 else:
                                     return 1
-                    if (board._bufferboard[row, col] == b"G"):
+                    if (board.bufferboard[row, col] == b"G"):
                         for i in board.enms:
                             if ((self.y <= i.y and self.endy >= i.y) or (self.endy >= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 self.powerup1 = True
                                 board.player.score += 50
                                 return 1
                 else:
-                    if (board._bufferboard[row, col] == b"@" or board._bufferboard[row, col] == b"|" or board._bufferboard[row, col] == b"/" or board._bufferboard[row, col] == b"\\"):
+                    if (board.bufferboard[row, col] == b"@" or board.bufferboard[row, col] == b"|" or board.bufferboard[row, col] == b"/" or board.bufferboard[row, col] == b"\\"):
                         if self.powerup1:
                             board.player.powerup1 = True
                             for i in board.enms:
                                 if i.y == self.y and i.endy == self.endy:
-                                    board._bufferboard[i.x:i.endx,
+                                    board.bufferboard[i.x:i.endx,
                                                        i.y-1:i.endy-1] = ""
                                     board.enms.remove(i)
                                 board.player.powerup1 = False
@@ -106,13 +106,13 @@ def move_maadi(self, board, ch):
                             return 2
                         else:
                             return 1
-                if (board._bufferboard[row, col] != ""):
+                if (board.bufferboard[row, col] != ""):
                     return 0
 
     if (ch == 'w'):
         for col in range(self.y, self.endy):
             for row in range(self.x, self.x+1):
-                if (board._bufferboard[row, col] != ""):
+                if (board.bufferboard[row, col] != ""):
                     return 0
 
     if (ch == 's'):
@@ -121,7 +121,7 @@ def move_maadi(self, board, ch):
                 self.powerup1 = False
                 reset(self, board, ch)
             else:
-                board._bufferboard[self.x:self.endx, self.y:self.endy] = ""
+                board.bufferboard[self.x:self.endx, self.y:self.endy] = ""
                 for i in board.enms:
                     if i.endx > -3:
                         board.enms.remove(i)
@@ -129,14 +129,14 @@ def move_maadi(self, board, ch):
         for col in range(self.y, self.endy):
             for row in range(self.endx-1, self.endx):
                 if (self.killed_by_enms):
-                    if (board._bufferboard[row, col] == b"M" or board._bufferboard[row, col] == b'0'):
-                        if board._bufferboard[row, col] == b"M":
+                    if (board.bufferboard[row, col] == b"M" or board.bufferboard[row, col] == b'0'):
+                        if board.bufferboard[row, col] == b"M":
                             board.player.score += 10
                         else:
                             board.player.score += 30
                         for i in board.enms:
                             if ((self.y <= i.y and self.endy >= i.y) or (self.endy >= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 move_maadi(self, board, ch)
@@ -145,19 +145,19 @@ def move_maadi(self, board, ch):
                                 move_maadi(self, board, ch)
                                 board.render(self.y-25)
                                 return 1
-                    if (board._bufferboard[row, col] == b"G"):
+                    if (board.bufferboard[row, col] == b"G"):
                         for i in board.enms:
                             if ((self.y <= i.y and self.endy >= i.y) or (self.endy >= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 self.powerup1 = True
                                 board.player.score += 50
                                 return 1
 
-                if (board._bufferboard[row, col] != "" and board._bufferboard[row, col] != b"c"):
-                    self.timeSinceLastJump = 10
-                    self.jump_counter = 0
+                if (board.bufferboard[row, col] != "" and board.bufferboard[row, col] != b"c"):
+                    self.time_since_last_jump = 10
+                    self.jumpCounter = 0
 
                     return 0
 
@@ -165,21 +165,21 @@ def move_maadi(self, board, ch):
         for col in range(self.y, self.endy):
             for row in range(self.x, self.x+1):
                 if (self.killed_by_enms):
-                    if (board._bufferboard[row, col] == b"G"):
+                    if (board.bufferboard[row, col] == b"G"):
                         for i in board.enms:
                             if ((self.y <= i.y and self.endy >= i.y) or (self.endy >= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 self.powerup1 = True
                                 return 1
-                if (board._bufferboard[row, col] != "" and board._bufferboard[row, col] != b"c"):
+                if (board.bufferboard[row, col] != "" and board.bufferboard[row, col] != b"c"):
 
                     return 0
 
     for row in range(self.x, self.endx):
         for col in range(self.y, self.endy):
-            if board._bufferboard[row, col] == b"c":
+            if board.bufferboard[row, col] == b"c":
                 board.player.score += 5
     return 1
 
@@ -211,28 +211,28 @@ def reset(self, board, ch):
         if (ch == 'a'):
             for row in range(self.x, self.endx):
                 for col in range(self.y, self.y + 1):
-                    if (board._bufferboard[row, col] == b"M" or board._bufferboard[row, col] == b'0'):
-                        if board._bufferboard[row, col] == b"M":
+                    if (board.bufferboard[row, col] == b"M" or board.bufferboard[row, col] == b'0'):
+                        if board.bufferboard[row, col] == b"M":
                             board.player.score += 10
                         else:
                             board.player.score += 30
                         for i in board.enms:
                             if ((self.y >= i.y and self.endy >= i.y) or (self.endy <= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 return 2
         if (ch == 'd'):
             for row in range(self.x, self.endx):
                 for col in range(self.endy-1, self.endy):
-                    if (board._bufferboard[row, col] == b"M" or board._bufferboard[row, col] == b'0'):
-                        if board._bufferboard[row, col] == b"M":
+                    if (board.bufferboard[row, col] == b"M" or board.bufferboard[row, col] == b'0'):
+                        if board.bufferboard[row, col] == b"M":
                             board.player.score += 10
                         else:
                             board.player.score += 30
                         for i in board.enms:
                             if ((self.y <= i.y and self.endy >= i.y) or (self.endy >= i.endy and self.y <= i.endy)):
-                                board._bufferboard[i.x:i.endx,
+                                board.bufferboard[i.x:i.endx,
                                                    i.y:i.endy] = ""
                                 board.enms.remove(i)
                                 return 2
@@ -250,7 +250,7 @@ def reset(self, board, ch):
 
     board.__init__(board.height, board.width, board.endlevelx, board.endlevelendx,
                    board.endlevely, board.endlevelendy, board.resen, board.resob, board.coins, board.player)
-    board._bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
+    board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
     board.render(self.y-25)
     config.reset = True
     return 1

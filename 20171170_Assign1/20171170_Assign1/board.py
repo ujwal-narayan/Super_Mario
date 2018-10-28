@@ -21,8 +21,8 @@ class Board:
         self.height = m
         self.width = n
         self.dimen = (n, m)
-        self._bufferboard = np.chararray((m, n))
-        self._bufferboard[:, :] = ""  # config.sky
+        self.bufferboard = np.chararray((m, n))
+        self.bufferboard[:, :] = ""  # config.sky
         self.framecounter = 0
         self.init_points = []
         self.endlevely = ey
@@ -40,7 +40,7 @@ class Board:
         self.resen = enemy
         self.resob = obsta
         for i in self.enms:
-            i.__init__(i.cx, i.cendx, i.cy, i.cendy, self)
+            i.__init__(i.current_x, i.cendx, i.current_y, i.cendy, self)
         for i in self.obs:
             i.__init__(i.x, i.endx, i.y, i.endy, self)
         for i in self.coins:
@@ -59,15 +59,15 @@ class Board:
             self.framecounter = 0
 
         # assigning the ground
-        self._bufferboard[-3:, :] = "g"  # config._ground
+        self.bufferboard[-3:, :] = "g"  # config._ground
         if config.level == 2:
-            self._bufferboard[-3:, 76:83] = ""
-            self._bufferboard[-3:, 137:142] = ""
+            self.bufferboard[-3:, 76:83] = ""
+            self.bufferboard[-3:, 137:142] = ""
 
         # assigning mario
         # put it in config and import later
 
-        #self._bufferboard[-6:-3,:3]= _mario
+        #self.bufferboard[-6:-3,:3]= mario
 
     def render(self, y_coordinate):
         # display board at every frame
@@ -81,9 +81,9 @@ class Board:
         for row in range(20):
             for col in range(y_coordinate, y_coordinate+100):
                 try:
-                    sys.stdout.write(getcc(self, self._bufferboard[row, col]))
+                    sys.stdout.write(getcc(self, self.bufferboard[row, col]))
                 except BaseException:
-                    sys.stdout.write(self._bufferboard[row, col].decode())
+                    sys.stdout.write(self.bufferboard[row, col].decode())
             sys.stdout.write("\n")
 
 
@@ -197,7 +197,7 @@ def getcc(self, charecter):
             return Back.BLUE + Fore.YELLOW + u"\U0001F4B0"
 
 
-# _mario1 = "\
+# mario1 = "\
 #              \n \
 # ─▄████▄▄░  \n \
 # ▄▀█▀▐└─┐░░ \n \
@@ -250,34 +250,34 @@ OBS2 = OBS1 + []
 
 '''
 #defining level 1
-#level1._bufferboard[-5:-3,28:32 ]=e1
-level1._bufferboard[-9:-7,34:38] = config._brickwalls
-level1._bufferboard[-9:-7,43:47] = config._brickwalls
-level1._bufferboard[-9:-7,47:51] = config._brickwalls
-level1._bufferboard[-9:-7,51:55] = config._brickwalls
-level1._bufferboard[-7:-3,66:74] = config.pipes
-level1._bufferboard[-9:-3,90:98] = config.bigpipes
-#level1._bufferboard[-5:-3,105:109 ]=config._mushroom
-level1._bufferboard[-9:-7,106:110] = config._brickwalls
-level1._bufferboard[-9:-7,110:114] = config._brickwalls
-level1._bufferboard[-9:-7,114:118] = config._brickwalls
-level1._bufferboard[-9:-3,150:158] = config.bigpipes
-#level1._bufferboard[-5:-3,170:174 ]=config._mushroom
-#level1._bufferboard[-5:-3,176:180 ]=config._mushroom
-level1._bufferboard[-9:-3,200:210] = config._goingdownpipe
-#level1._bufferboard[-5:-3,220:224 ]=config._mushroom
-level1._bufferboard[-7:-3,238:246] = config.pipes
-level1._bufferboard[-9:-7,260:264] = config._brickwalls
-level1._bufferboard[-9:-7,264:268] = config._brickwalls
-level1._bufferboard[-9:-7,268:272] = config._brickwalls
-level1._bufferboard[-9:-7,272:276] = config._brickwalls
-level1._bufferboard[-9:-7,284:288] = config._brickwalls
-level1._bufferboard[-9:-7,280:284] = config._brickwalls
-#level1._bufferboard[-5:-3,265:269 ]=config._mushroom
-#level1._bufferboard[-5:-3,273:277 ]=config._mushroom
-level1._bufferboard[-13:-3,300:314] = config._zigzagwall
-level1._bufferboard[-13:-3,328:330] = config._flagpost
-level1._bufferboard[-11:-3,338:348] = config._castle
+#level1.bufferboard[-5:-3,28:32 ]=e1
+level1.bufferboard[-9:-7,34:38] = config.brickwalls
+level1.bufferboard[-9:-7,43:47] = config.brickwalls
+level1.bufferboard[-9:-7,47:51] = config.brickwalls
+level1.bufferboard[-9:-7,51:55] = config.brickwalls
+level1.bufferboard[-7:-3,66:74] = config.pipes
+level1.bufferboard[-9:-3,90:98] = config.bigpipes
+#level1.bufferboard[-5:-3,105:109 ]=config.mushroom
+level1.bufferboard[-9:-7,106:110] = config.brickwalls
+level1.bufferboard[-9:-7,110:114] = config.brickwalls
+level1.bufferboard[-9:-7,114:118] = config.brickwalls
+level1.bufferboard[-9:-3,150:158] = config.bigpipes
+#level1.bufferboard[-5:-3,170:174 ]=config.mushroom
+#level1.bufferboard[-5:-3,176:180 ]=config.mushroom
+level1.bufferboard[-9:-3,200:210] = config.goingdownpipe
+#level1.bufferboard[-5:-3,220:224 ]=config.mushroom
+level1.bufferboard[-7:-3,238:246] = config.pipes
+level1.bufferboard[-9:-7,260:264] = config.brickwalls
+level1.bufferboard[-9:-7,264:268] = config.brickwalls
+level1.bufferboard[-9:-7,268:272] = config.brickwalls
+level1.bufferboard[-9:-7,272:276] = config.brickwalls
+level1.bufferboard[-9:-7,284:288] = config.brickwalls
+level1.bufferboard[-9:-7,280:284] = config.brickwalls
+#level1.bufferboard[-5:-3,265:269 ]=config.mushroom
+#level1.bufferboard[-5:-3,273:277 ]=config.mushroom
+level1.bufferboard[-13:-3,300:314] = config.zigzagwall
+level1.bufferboard[-13:-3,328:330] = config.flagpost
+level1.bufferboard[-11:-3,338:348] = config.castle
 '''
 
 T1 = Turtles(-5, -3, 33, 37, LEVEL0)

@@ -7,7 +7,7 @@ class Characters:
     """ Common for all Characters """
 
     def __init__(self, x, ex, y, ey, board):
-        """ Figure out the x and Y shit later """
+        """ Initial States """
 
         self.x = x
         self.y = y
@@ -21,15 +21,17 @@ class Characters:
         self.killed_by_enms = False
         self.powerup1 = False
         if config.reset is False:
-            self.cx = x
-            self.cy = y
+            self.current_x = x
+            self.current_y = y
             self.cendx = ex
             self.cendy = ey
 
     def get_coods(self):
+        """ get the co-ordinates """
         return (self.x, self.y, self.endx, self.endy)
 
-    def moveDown(self, board, direction='s'):
+    def move_down(self, board, direction='s'):
+        """ Function to implement downward movement"""
         orignal_x = self.x
         oendx = self.endx
         orignal_y = self.y
@@ -38,9 +40,8 @@ class Characters:
         self.endx += 1
         return_value_move = move_maadi(self, board, direction)
         if return_value_move == 1:
-            board._bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
-            board._bufferboard[self.x:self.endx,
-                               self.y:self.endy] = self.struct
+            board.bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
+            board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
             return True
         elif return_value_move == 0:
             self.x = orignal_x
@@ -49,7 +50,8 @@ class Characters:
             self.endy = oendy
             return False
 
-    def moveUp(self, board, direction='w'):
+    def move_up(self, board, direction='w'):
+        """ Function to move up """
         orignal_x = self.x
         oendx = self.endx
         orignal_y = self.y
@@ -58,9 +60,8 @@ class Characters:
         self.endx -= 1
         return_value_move = move_maadi(self, board, direction)
         if return_value_move == 1:
-            board._bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
-            board._bufferboard[self.x:self.endx,
-                               self.y:self.endy] = self.struct
+            board.bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
+            board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
             return True
         elif return_value_move == 0:
             self.x = orignal_x
@@ -69,7 +70,8 @@ class Characters:
             self.endy = oendy
             return False
 
-    def moveLeft(self, board, direction='a'):
+    def move_left(self, board, direction='a'):
+        """ Function to move left """
         orignal_x = self.x
         oendx = self.endx
         orignal_y = self.y
@@ -78,9 +80,8 @@ class Characters:
         self.endy -= 1
         return_value_move = move_maadi(self, board, direction)
         if return_value_move == 1:
-            board._bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
-            board._bufferboard[self.x:self.endx,
-                               self.y:self.endy] = self.struct
+            board.bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
+            board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
             return True
         elif return_value_move == 0:
             self.x = orignal_x
@@ -89,7 +90,8 @@ class Characters:
             self.endy = oendy
             return False
 
-    def moveRight(self, board, direction='d'):
+    def move_right(self, board, direction='d'):
+        """ Function to move right """
         orignal_x = self.x
         oendx = self.endx
         orignal_y = self.y
@@ -98,9 +100,8 @@ class Characters:
         self.endy += 1
         return_value_move = move_maadi(self, board, direction)
         if return_value_move == 1:
-            board._bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
-            board._bufferboard[self.x:self.endx,
-                               self.y:self.endy] = self.struct
+            board.bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
+            board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
             return True
         elif return_value_move == 0:
             self.x = orignal_x
@@ -110,20 +111,21 @@ class Characters:
             return False
 
     def speed_imp(self, board, charecter):
+        """ Function to implement multiple speeds """
         ret = False
         if charecter == 's':
             for _ in range(self.speed):
-                speed_var = self.moveDown(board, charecter)
+                speed_var = self.move_down(board, charecter)
                 if speed_var:
                     ret = True
         if charecter == 'd':
             for _ in range(self.speed):
-                speed_var = self.moveRight(board, charecter)
+                speed_var = self.move_right(board, charecter)
                 if speed_var:
                     ret = True
         if charecter == 'a':
             for _ in range(self.speed):
-                speed_var = self.moveLeft(board, charecter)
+                speed_var = self.move_left(board, charecter)
                 if speed_var:
                     ret = True
         return ret
@@ -135,13 +137,13 @@ class Powerup1(Characters):
     def __init__(self, x, ex, y, ey, board):
         super(Powerup1, self).__init__(x, ex, y, ey, board)
         self.speed = config.powerup_speed
-        self.struct = config._powerup1
+        self.struct = config.powerup1
         self.mover = 'd'
         self.powerup1 = True
-        board._bufferboard[self.cx:self.cendx,
-                           self.cy:self.cendy] = self.struct
+        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
     def move(self, board):
+        """ Function to move """
         if self.y == 0:
             pass
         if self.speed_imp(board, 's'):
@@ -168,16 +170,16 @@ class Mario(Characters):
         self.score = 0
         self.speed = config.speed
         self.jump = config.jump
-        self.timeSinceLastJump = 100
+        self.time_since_last_jump = 100
         self.jump_counter = 0
         self.damage = 10
         self.killed_by_enms = True
         self.powerup1 = False
-        self.struct = config._mario
-        board._bufferboard[self.cx:self.cendx,
-                           self.cy:self.cendy] = self.struct
+        self.struct = config.mario
+        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
-    def jumpUp(self, board, direction):
+    def jump_up(self, board, direction):
+        """ Function to jump """
         orignal_x = self.x
         oendx = self.endx
         orignal_y = self.y
@@ -186,17 +188,16 @@ class Mario(Characters):
         self.endx -= 1
         jump_possible = True
 
-        if self.timeSinceLastJump > 10:
+        if self.time_since_last_jump > 10:
             self.jump_counter = 0
         else:
             if self.jump_counter > 2 * self.jump:
                 jump_possible = False
         return_value_move = move_maadi(self, board, direction)
         if return_value_move == 1 and jump_possible:
-            board._bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
-            board._bufferboard[self.x:self.endx,
-                               self.y:self.endy] = self.struct
-            self.timeSinceLastJump = 0
+            board.bufferboard[orignal_x:oendx, orignal_y:oendy] = ""
+            board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
+            self.time_since_last_jump = 0
             self.jump_counter += 1
             return True
         elif return_value_move == 0 or not jump_possible:
@@ -206,24 +207,26 @@ class Mario(Characters):
             self.endy = oendy
             return False
 
-    def jumpUps(self, board, charecter):
+    def jump_ups(self, board, charecter):
+        """ Function to implement multiple jumps """
         for _ in range(self.jump):
-            self.jumpUp(board, charecter)
+            self.jump_up(board, charecter)
 
     def move(self, charecter, board):
+        """ Function to implement move """
         if charecter == 'w' or charecter == 'W':
-            self.jumpUps(board, 'j')
+            self.jump_ups(board, 'j')
         if charecter == 's' or charecter == 'S':
             self.speed_imp(board, 's')
-            # self.moveDown(board,charecter)
+            # self.move_down(board,charecter)
         elif charecter == 'a' or charecter == 'A':
             self.speed_imp(board, 'a')
-            # self.moveLeft(board,charecter)
+            # self.move_left(board,charecter)
         elif charecter == 'd' or charecter == 'D':
             self.speed_imp(board, 'd')
-            # self.moveRight(board,charecter)
+            # self.move_right(board,charecter)
         elif charecter == ' ':
-            self.jumpUps(board, 'j')
+            self.jump_ups(board, 'j')
 
 
 class Mushroom(Characters):
@@ -233,12 +236,12 @@ class Mushroom(Characters):
         super(Mushroom, self).__init__(x, ex, y, ey, board)
         self.lives = lives
         self.speed = config.mushroom_speed
-        self.struct = config._mushroom
-        board._bufferboard[self.cx:self.cendx,
-                           self.cy:self.cendy] = self.struct
+        self.struct = config.mushroom
+        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
         self.mover = 'a'
 
     def move(self, board):
+        """ Function to implement move """
         if self.mover == 'a':
             if self.speed_imp(board, 'a'):
                 pass
@@ -256,15 +259,14 @@ class Turtles(Characters):
 
     def __init__(self, x, ex, y, ey, board, lives=1):
         super(Turtles, self).__init__(x, ex, y, ey, board)
-        self.lives = 1
+        self.lives = lives
         self.damage = 50
         self.speed = config.mushroom_speed
         self.struct = config.turtle
-        board._bufferboard[self.cx:self.cendx,
-                           self.cy:self.cendy] = self.struct
+        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
     def move(self, board):
-
+        """ FUnction to implement move """
         if self.y > board.player.y:
             self.speed_imp(board, 'a')
         else:
@@ -274,16 +276,16 @@ class Turtles(Characters):
 class DarthVader(Characters):
     """I AM THE SENATE .the big bad boss himself """
 
-    def __init__(self, x, ex, y, ey, board, lives=2):
+    def __init__(self, x, ex, y, ey, board, lives=3):
         super(DarthVader, self).__init__(x, ex, y, ey, board)
         self.damage = 10
-        self.lives = 3
+        self.lives = lives
         self.speed = 10
         self.struct = config.darthvader
-        board._bufferboard[self.cx:self.cendx,
-                           self.cy:self.cendy] = self.struct
+        board.bufferboard[self.current_x:self.cendx, self.current_y:self.cendy] = self.struct
 
     def move(self, board):
+        """ Function to implement move """
         if board.player.endx < -3:
             self.y = board.player.y + 1
             self.endy = board.player.endy + 1
@@ -312,8 +314,7 @@ class Pipes(Obstacles):
     def __init__(self, x, ex, y, ey, board):
         super(Pipes, self).__init__(x, ex, y, ey, board)
         self.struct = config.pipes
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class BigPipes(Obstacles):
@@ -322,8 +323,7 @@ class BigPipes(Obstacles):
     def __init__(self, x, ex, y, ey, board):
         super(BigPipes, self).__init__(x, ex, y, ey, board)
         self.struct = config.bigpipes
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class SldingPipes(Obstacles):
@@ -331,9 +331,8 @@ class SldingPipes(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(SldingPipes, self).__init__(x, ex, y, ey, board)
-        self.struct = config._goingdownpipe
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.goingdownpipe
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class Bricks(Obstacles):
@@ -341,9 +340,8 @@ class Bricks(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Bricks, self).__init__(x, ex, y, ey, board)
-        self.struct = config._brickwalls
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.brickwalls
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class Flagpost(Obstacles):
@@ -351,9 +349,8 @@ class Flagpost(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Flagpost, self).__init__(x, ex, y, ey, board)
-        self.struct = config._flagpost
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.flagpost
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class ZigZagWall(Obstacles):
@@ -361,9 +358,8 @@ class ZigZagWall(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(ZigZagWall, self).__init__(x, ex, y, ey, board)
-        self.struct = config._zigzagwall
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.zigzagwall
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class Castle(Obstacles):
@@ -371,9 +367,8 @@ class Castle(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Castle, self).__init__(x, ex, y, ey, board)
-        self.struct = config._castle
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.castle
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class Pits(Obstacles):
@@ -381,9 +376,8 @@ class Pits(Obstacles):
 
     def __init__(self, x, ex, y, ey, board):
         super(Pits, self).__init__(x, ex, y, ey, board)
-        self.struct = config._pits
-        board._bufferboard[self.x:self.endx,
-                           self.y:self.endy] = self.struct
+        self.struct = config.pits
+        board.bufferboard[self.x:self.endx, self.y:self.endy] = self.struct
 
 
 class Coins():
@@ -393,4 +387,4 @@ class Coins():
         self.x = x
         self.y = y
         self.struct = config.coins
-        board._bufferboard[self.x:self.x+1, self.y:self.y+1] = self.struct
+        board.bufferboard[self.x:self.x+1, self.y:self.y+1] = self.struct

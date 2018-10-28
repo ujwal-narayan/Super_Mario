@@ -18,14 +18,14 @@ mari = np.chararray((7,137))
 mari[:,:] = "+"
 #6*13 size mario
 '''
-_mario = np.chararray((3, 3))
-_mario[:, :] = ""
-_mario[0, 1] = "@"
-_mario[1, 0] = "/"
-_mario[1, 1] = "|"
-_mario[1, 2] = "\\"
-_mario[2, 0] = _mario[1, 0]
-_mario[2, 2] = _mario[1, 2]
+mario = np.chararray((3, 3))
+mario[:, :] = ""
+mario[0, 1] = "@"
+mario[1, 0] = "/"
+mario[1, 1] = "|"
+mario[1, 2] = "\\"
+mario[2, 0] = mario[1, 0]
+mario[2, 2] = mario[1, 2]
 
 
 _e1 = "E"
@@ -45,7 +45,7 @@ types = {
     _sky: "Sky",
 
 
-    #   _mario : "Mario",
+    #   mario : "Mario",
 
     # _e1 : "Mushrooms",
 
@@ -103,7 +103,7 @@ def printcc(st, color):
     except KeyError:
         return st
 
-print(_mario)
+print(mario)
 '''
 ground_coodsx = None
 ground_coods_ex = None
@@ -125,62 +125,62 @@ bigpipes[0, :] = '_'
 bigpipes[1:, 1] = 'p'
 bigpipes[1:, -2] = 'p'
 
-_goingdownpipe = np.chararray((6, 10))
-_goingdownpipe[:, :] = ""
-_goingdownpipe[0, :] = '_'
-_goingdownpipe[1:, 1] = 'p'
-_goingdownpipe[1:, -2] = 'p'
+goingdownpipe = np.chararray((6, 10))
+goingdownpipe[:, :] = ""
+goingdownpipe[0, :] = '_'
+goingdownpipe[1:, 1] = 'p'
+goingdownpipe[1:, -2] = 'p'
 
 
 # brickwalls
 
-_brickwalls = np.chararray((2, 4))
-_brickwalls[:, :] = "b"
+brickwalls = np.chararray((2, 4))
+brickwalls[:, :] = "b"
 
 # the zigzaggy wall
-_zigzagwall = np.chararray((10, 14))
-_zigzagwall[:, :] = ""
-_zigzagwall[:, -1] = 'W'
-_zigzagwall[-3:, 3:] = 'W'
-_zigzagwall[-5:, -8:] = 'W'
-_zigzagwall[-7:, -5:] = 'W'
-_zigzagwall[-9:, -3:] = 'W'
-_zigzagwall[-1:, :] = 'W'
+zigzagwall = np.chararray((10, 14))
+zigzagwall[:, :] = ""
+zigzagwall[:, -1] = 'W'
+zigzagwall[-3:, 3:] = 'W'
+zigzagwall[-5:, -8:] = 'W'
+zigzagwall[-7:, -5:] = 'W'
+zigzagwall[-9:, -3:] = 'W'
+zigzagwall[-1:, :] = 'W'
 
 # flag post
-_flagpost = np.chararray((10, 2))
-_flagpost[:, :] = "l"
+flagpost = np.chararray((10, 2))
+flagpost[:, :] = "l"
 # add a flag or a triangle on top
-#_flagpost[:,:]
+#flagpost[:,:]
 
 # castle
-_castle = np.chararray((8, 10))
-_castle[:, :] = ""
-_castle[-4:, :] = "C"
-_castle[2:4, 2:8] = "C"
-_castle[-2:, 4:7] = "B"
-_castle[-3, 4:7] = "B"
-_castle[2:4, 3] = "B"
-_castle[2:4, 6] = "B"
-_castle[0, 4:6] = "C"
-_castle[1, 3:7] = "C"
+castle = np.chararray((8, 10))
+castle[:, :] = ""
+castle[-4:, :] = "C"
+castle[2:4, 2:8] = "C"
+castle[-2:, 4:7] = "B"
+castle[-3, 4:7] = "B"
+castle[2:4, 3] = "B"
+castle[2:4, 6] = "B"
+castle[0, 4:6] = "C"
+castle[1, 3:7] = "C"
 
 # pits
-_pits = np.chararray((3, 4))
-_pits[:, :] = "0"
+pits = np.chararray((3, 4))
+pits[:, :] = "0"
 # Powerups
 
-_powerup1 = np.chararray((2, 3))
-_powerup1[:, :] = "G"
-_powerup1[-1, -1] = " "
-_powerup1[-1, 0] = " "
+powerup1 = np.chararray((2, 3))
+powerup1[:, :] = "G"
+powerup1[-1, -1] = " "
+powerup1[-1, 0] = " "
 
 # enemy1
 
-_mushroom = np.chararray((2, 4))
-_mushroom[:, :] = "M"
-_mushroom[1, 0] = " "
-_mushroom[-1, -1] = " "
+mushroom = np.chararray((2, 4))
+mushroom[:, :] = "M"
+mushroom[1, 0] = " "
+mushroom[-1, -1] = " "
 
 # enemy2
 

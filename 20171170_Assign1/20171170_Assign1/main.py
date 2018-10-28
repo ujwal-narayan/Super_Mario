@@ -70,7 +70,7 @@ while a == 'r':
     if time.time() > timer1:
         if(mario.endx < -3):
             mario.move('s', board)
-        mario.timeSinceLastJump += 1
+        mario.time_since_last_jump += 1
 
         timer1 = time.time()
     if time.time() > timer + 1:
@@ -123,7 +123,7 @@ if config.level == 2:
         if time.time() > timer1:
             if(mario.endx < 0):
                 mario.move('s', board)
-            mario.timeSinceLastJump += 1
+            mario.time_since_last_jump += 1
 
             timer1 = time.time()
         if time.time() > timer + 1:

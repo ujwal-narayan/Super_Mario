@@ -1,40 +1,42 @@
-
+""" Takes care of the input to the game """
 UP, DOWN, LEFT, RIGHT, BOMB, QUIT = range(6)
 DIR = [UP, DOWN, LEFT, RIGHT]
 INVALID = -1
 
-_allowed_inputs = {
+ALLOWEDINPUTS = {
     UP: ['w', '\x1b[A'],
     DOWN: ['s', '\x1b[B'],
     LEFT: ['a', '\x1b[D'],
     RIGHT: ['d', '\x1b[C'],
-    BOMB: ['b'],
     QUIT: ['q']
 }
 
 
 def get_key(key):
-    for x in _allowed_inputs:
-        if key in _allowed_inputs[x]:
-            return x
+    """ Check if it's a valid input or not"""
+    for input_charecter_result in ALLOWEDINPUTS:
+        if key in ALLOWEDINPUTS[input_charecter_result]:
+            return input_charecter_result
     return INVALID
 
 
-# Gets a single character from standard input.  Does not echo to the screen.
 class _Getch:
-
+    """ Gets a single character from standard input.  Does not echo to the screen."""
     def __init__(self):
-        try:
-            self.impl = _GetchWindows()
-        except ImportError:
-            self.impl = _GetchUnix()
-
+        # try:
+            # placeholer_silfimplwin = _GetchWindows()
+            # isplaceholder = 0
+        # except ImportError:
+        placeholer_silfimplunix = _GetchUnix()
+        # isplaceholder = 1
+        # if isplaceholder == 1:
+        self.impl = placeholer_silfimplunix
+        # elif isplaceholder == 0:
+            # self.impl = placeholer_silfimplwin
     def __call__(self):
         return self.impl()
 
-
 class _GetchUnix:
-
     def __init__(self):
         import tty
         import sys
@@ -47,39 +49,44 @@ class _GetchUnix:
         old_settings = termios.tcgetattr(fedvar)
         try:
             tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
+            charecter = sys.stdin.read(1)
         finally:
             termios.tcsetattr(fedvar, termios.TCSADRAIN, old_settings)
-        return ch
+        return charecter
 
 
-class _GetchWindows:
+# class _GetchWindows:
 
-    def __init__(self):
-        import msvcrt
+#     def __init__(self):
+#         import msvcrt
 
-    def __call__(self):
-        import msvcrt
-        return msvcrt.getch()
+#     def __call__(self):
+#         import msvcrt
+#         return msvcrt.getch()
 
 
-_getch = _Getch()
+GETCH = _Getch()
 
 
 class AlarmException(Exception):
+    """ To stop the alarms """
     pass
 
 
-def alarmHandler(signum, frame):
+def alarmhandler(signum, frame):
+    """ Function to detect alarms """
+    del signum
+    del frame
     raise AlarmException
 
 
 def get_input(timeout=1):
+    """ Function to get the user input """
     import signal
-    signal.signal(signal.SIGALRM, alarmHandler)
+    signal.signal(signal.SIGALRM, alarmhandler)
     signal.alarm(timeout)
     try:
-        text = _getch()
+        text = GETCH()
         signal.alarm(0)
         return text
     except AlarmException:
