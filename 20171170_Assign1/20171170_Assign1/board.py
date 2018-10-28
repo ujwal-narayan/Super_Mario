@@ -42,9 +42,9 @@ class Board:
         for i in self.enms:
             i.__init__(i.current_x, i.cendx, i.current_y, i.cendy, self)
         for i in self.obs:
-            i.__init__(i.x, i.endx, i.y, i.endy, self)
+            i.__init__(i.x_pos, i.endx, i.y_pos, i.endy, self)
         for i in self.coins:
-            i.__init__(i.x, i.y, self)
+            i.__init__(i.x_pos, i.y_pos, self)
 
         self.init_board()
 

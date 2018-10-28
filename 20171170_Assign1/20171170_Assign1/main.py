@@ -57,7 +57,7 @@ while a == 'r':
         # prev_round = cur_round"""
 
     mario.move(p_input, board)
-    board.render((mario.y - 25))
+    board.render((mario.y_pos - 25))
     # board.printer(0,20,0,190)
     print(mario.get_coods())
     print("Score :", end="")
@@ -109,7 +109,7 @@ if config.level == 2:
             exit()
 
         mario.move(p_input, board)
-        board.render((mario.y - 25))
+        board.render((mario.y_pos - 25))
         # board.printer(0,20,0,190)
         print(mario.get_coods())
         print("Score :", end="")
