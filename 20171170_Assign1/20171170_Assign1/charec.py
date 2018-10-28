@@ -307,6 +307,7 @@ class Obstacles:
         self.endy = ey
         self.struct = ""
         self.breakable = False
+        del board
 
 
 class Pipes(Obstacles):
