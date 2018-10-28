@@ -49,3 +49,19 @@ The game has been written keeping in mind OOP principles.<br/>
 The application demonstrates inheritance, encapsulation and polymorphism.<br/>
 The code is modular and documneted . 
 It is also pep8 compliant 
+
+
+## Changes made 
+
+### `Board.py`
+
+### Pylint Changes 
+
++ Changed variable names to pep8 conventions
++ Fixed Trailing whiespace 
++ Fixed the line length 
++ Fixed the invalid names 
++ Followed the proper name conventions for variables 
++ Fixed acess to protected class 
+
+Pylint score : 9.06 

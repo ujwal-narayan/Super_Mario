@@ -57,7 +57,7 @@ while a == 'r':
         # prev_round = cur_round"""
 
     mario.move(p_input, board)
-    board.render((mario._y - 25))
+    board.render((mario.y - 25))
     # board.printer(0,20,0,190)
     print(mario.get_coods())
     print("Score :", end="")
@@ -68,7 +68,7 @@ while a == 'r':
     print(round(config.x))
 
     if time.time() > timer1:
-        if(mario._endx < -3):
+        if(mario.endx < -3):
             mario.move('s', board)
         mario.timeSinceLastJump += 1
 
@@ -87,10 +87,10 @@ if config.level == 2:
     board = b.Board(20, 500, -6, -3, 342, 345,
                     b.ENMS_2, b.OBS2, b.COINSARR, mario)
 
-    mario.self_x = -6
-    mario.self_endx = -3
-    mario.self_y = 0
-    mario.self_endy = 3
+    mario.selfx = -6
+    mario.selfendx = -3
+    mario.selfy = 0
+    mario.selfendy = 3
     lv2_START = time.time()
 
     while a == 'r':
@@ -109,7 +109,7 @@ if config.level == 2:
             exit()
 
         mario.move(p_input, board)
-        board.render((mario._y - 25))
+        board.render((mario.y - 25))
         # board.printer(0,20,0,190)
         print(mario.get_coods())
         print("Score :", end="")
@@ -121,7 +121,7 @@ if config.level == 2:
 
         time.sleep(00.02)
         if time.time() > timer1:
-            if(mario._endx < 0):
+            if(mario.endx < 0):
                 mario.move('s', board)
             mario.timeSinceLastJump += 1
 

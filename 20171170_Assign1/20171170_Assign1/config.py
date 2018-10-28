@@ -105,25 +105,25 @@ def printcc(st, color):
 
 print(_mario)
 '''
-ground_coods_x = None
+ground_coodsx = None
 ground_coods_ex = None
-ground_coods_y = None
+ground_coodsy = None
 ground_coods_ey = None
 
 
 # pipes
-_pipes = np.chararray((4, 8))
-_pipes[:, :] = ""
-_pipes[1:, 1] = 'p'
-_pipes[1:, 6] = 'p'
-_pipes[0, :] = '_'
+pipes = np.chararray((4, 8))
+pipes[:, :] = ""
+pipes[1:, 1] = 'p'
+pipes[1:, 6] = 'p'
+pipes[0, :] = '_'
 
 
-_bigpipes = np.chararray((6, 8))
-_bigpipes[:, :] = ""
-_bigpipes[0, :] = '_'
-_bigpipes[1:, 1] = 'p'
-_bigpipes[1:, -2] = 'p'
+bigpipes = np.chararray((6, 8))
+bigpipes[:, :] = ""
+bigpipes[0, :] = '_'
+bigpipes[1:, 1] = 'p'
+bigpipes[1:, -2] = 'p'
 
 _goingdownpipe = np.chararray((6, 10))
 _goingdownpipe[:, :] = ""
@@ -184,26 +184,26 @@ _mushroom[-1, -1] = " "
 
 # enemy2
 
-_turtle = np.chararray((2, 4))
-_turtle[:, :] = "0"
-_turtle[1, 0] = " "
-_turtle[-1, -1] = " "
+turtle = np.chararray((2, 4))
+turtle[:, :] = "0"
+turtle[1, 0] = " "
+turtle[-1, -1] = " "
 
 # enemy3
 
-_darthvader = np.chararray((3, 3))
-_darthvader[:, :] = ""
-_darthvader[0, 1] = "O"
-_darthvader[1, 0] = "["
-_darthvader[2, 0] = "<"
-_darthvader[2, 1:] = "I"
-_darthvader[2, 2] = ">"
-_darthvader[2, 1] = "]"
+darthvader = np.chararray((3, 3))
+darthvader[:, :] = ""
+darthvader[0, 1] = "O"
+darthvader[1, 0] = "["
+darthvader[2, 0] = "<"
+darthvader[2, 1:] = "I"
+darthvader[2, 2] = ">"
+darthvader[2, 1] = "]"
 
 
 # coins
-_coins = np.chararray((1, 1))
-_coins[:, :] = "c"
+coins = np.chararray((1, 1))
+coins[:, :] = "c"
 
 
 '''constants '''

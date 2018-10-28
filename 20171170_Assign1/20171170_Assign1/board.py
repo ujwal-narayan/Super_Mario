@@ -25,39 +25,31 @@ class Board:
         self._bufferboard[:, :] = ""  # config.sky
         self.framecounter = 0
         self.init_points = []
-        self.endlevel_y = ey
-        self.endlevel_endy = eey
-        self.endlevel_x = ex
-        self.endlevel_endx = eex
+        self.endlevely = ey
+        self.endlevelendy = eey
+        self.endlevelx = ex
+        self.endlevelendx = eex
         self.enms = enemy + []
         self.obs = obsta + []
         self.coins = coins
-        self.mariospawn_x = mx
-        self.mariospawn_endx = mex
-        self.mariospawn_y = my
-        self.mariospawn_endy = mey
+        self.mariospawnx = mx
+        self.mariospawnendx = mex
+        self.mariospawny = my
+        self.mariospawnendy = mey
         self.player = player
         self.resen = enemy
         self.resob = obsta
         for i in self.enms:
             i.__init__(i.cx, i.cendx, i.cy, i.cendy, self)
         for i in self.obs:
-            i.__init__(i._x, i._endx, i._y, i._endy, self)
+            i.__init__(i.x, i.endx, i.y, i.endy, self)
         for i in self.coins:
-            i.__init__(i._x, i._y, self)
+            i.__init__(i.x, i.y, self)
 
         self.init_board()
 
         # This stores a list of all the enemies and coins
-        """self._storage = {
-            config._types[config._e1]: [],
-            config._types[config._e2]: [],
-            config._types[config._e3]: [],
-            config._types[config._coins]: [],
-            config._types[config._powerup]: []
-
-        }
-            """
+        
         # Stores the player.Try multiplayer uing threading if there's time
         self.players = []
 
@@ -263,18 +255,18 @@ level1._bufferboard[-9:-7,34:38] = config._brickwalls
 level1._bufferboard[-9:-7,43:47] = config._brickwalls
 level1._bufferboard[-9:-7,47:51] = config._brickwalls
 level1._bufferboard[-9:-7,51:55] = config._brickwalls
-level1._bufferboard[-7:-3,66:74] = config._pipes
-level1._bufferboard[-9:-3,90:98] = config._bigpipes
+level1._bufferboard[-7:-3,66:74] = config.pipes
+level1._bufferboard[-9:-3,90:98] = config.bigpipes
 #level1._bufferboard[-5:-3,105:109 ]=config._mushroom
 level1._bufferboard[-9:-7,106:110] = config._brickwalls
 level1._bufferboard[-9:-7,110:114] = config._brickwalls
 level1._bufferboard[-9:-7,114:118] = config._brickwalls
-level1._bufferboard[-9:-3,150:158] = config._bigpipes
+level1._bufferboard[-9:-3,150:158] = config.bigpipes
 #level1._bufferboard[-5:-3,170:174 ]=config._mushroom
 #level1._bufferboard[-5:-3,176:180 ]=config._mushroom
 level1._bufferboard[-9:-3,200:210] = config._goingdownpipe
 #level1._bufferboard[-5:-3,220:224 ]=config._mushroom
-level1._bufferboard[-7:-3,238:246] = config._pipes
+level1._bufferboard[-7:-3,238:246] = config.pipes
 level1._bufferboard[-9:-7,260:264] = config._brickwalls
 level1._bufferboard[-9:-7,264:268] = config._brickwalls
 level1._bufferboard[-9:-7,268:272] = config._brickwalls
