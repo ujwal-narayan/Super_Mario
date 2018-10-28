@@ -213,4 +213,4 @@ mushroom_speed = 3
 level = 1
 powerup_speed = 5
 reset = False
-x = 0
+x_pos = 0

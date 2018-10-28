@@ -37,11 +37,11 @@ lev1_start = time.time()
 
 while a == 'r':
     if config.level == 2:
-        mario.score += round(config.x)
+        mario.score += round(config.x_pos)
         break
     p_input = (input.get_input())
-    config.x = 200 - (time.time()-lev1_start)
-    if config.x <= 0:
+    config.x_pos = 200 - (time.time()-lev1_start)
+    if config.x_pos <= 0:
         print("TIME IS UP")
         print("Score :", end="")
         print(mario.score)
@@ -57,7 +57,7 @@ while a == 'r':
         # prev_round = cur_round"""
 
     mario.move(p_input, board)
-    board.render((mario.y - 25))
+    board.render((mario.y_pos - 25))
     # board.printer(0,20,0,190)
     print(mario.get_coods())
     print("Score :", end="")
@@ -65,7 +65,7 @@ while a == 'r':
     print("Lives left :", end="")
     print(mario.lives)
     print("Time left ", end="")
-    print(round(config.x))
+    print(round(config.x_pos))
 
     if time.time() > timer1:
         if(mario.endx < -3):
@@ -101,15 +101,15 @@ if config.level == 2:
             quit_val = 0
             break
 
-        config.x = 200 - (time.time()-lv2_START)
-        if config.x <= 0:
+        config.x_pos = 200 - (time.time()-lv2_START)
+        if config.x_pos <= 0:
             print("TIMES UP")
             print("Score :", end="")
             print(mario.score)
             exit()
 
         mario.move(p_input, board)
-        board.render((mario.y - 25))
+        board.render((mario.y_pos - 25))
         # board.printer(0,20,0,190)
         print(mario.get_coods())
         print("Score :", end="")
@@ -117,7 +117,7 @@ if config.level == 2:
         print("Lives left :", end="")
         print(mario.lives)
         print("Time left ", end="")
-        print(round(config.x))
+        print(round(config.x_pos))
 
         time.sleep(00.02)
         if time.time() > timer1:
