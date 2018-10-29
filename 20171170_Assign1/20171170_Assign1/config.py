@@ -160,3 +160,4 @@ LEVEL = 1
 POWERUP_SPEED = 5
 RESET = False
 X_POS = 0
+ALIVE = True

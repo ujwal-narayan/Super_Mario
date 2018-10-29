@@ -1,0 +1,15 @@
+actionid: py35
+msg: installpkg
+cmdargs: "'/media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/py35/bin/python' -m pip install --exists-action w '/media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/.tmp/package/1/Mario-0.1.zip'"
+
+Processing ./.tox/.tmp/package/1/Mario-0.1.zip
+Building wheels for collected packages: Mario
+  Running setup.py bdist_wheel for Mario: started
+  Running setup.py bdist_wheel for Mario: finished with status 'done'
+  Stored in directory: /home/badwolf/.cache/pip/wheels/be/df/76/9b8e04895bf3a441549962ecad5521d791dc2782b948761221
+Successfully built Mario
+Installing collected packages: Mario
+  Found existing installation: Mario 0.1
+    Not uninstalling mario at /media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1, outside environment /media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/py35
+    Can't uninstall 'Mario'. No files were found to uninstall.
+Successfully installed Mario-0.1

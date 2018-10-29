@@ -1,0 +1,11 @@
+actionid: py27
+msg: getenv
+cmdargs: "'/media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/py27/bin/python' -m pip install colorama pytest numpy"
+
+Collecting colorama
+  Using cached https://files.pythonhosted.org/packages/0a/93/6e8289231675d561d476d656c2ee3a868c1cca207e16c118d4503b25e2bf/colorama-0.4.0-py2.py3-none-any.whl
+Collecting pytest
+  Using cached https://files.pythonhosted.org/packages/02/75/d041ed00994fbac4c5183e6f4bf6c906506bef8da7a57ef3fc825f171020/pytest-3.9.3-py2.py3-none-any.whl
+Collecting numpy
+  Downloading https://files.pythonhosted.org/packages/9e/eb/c9eda9f4865d669e0bb37ce5c780e86c63daa54ca827b95a171429012d08/numpy-1.15.3-cp27-cp27mu-manylinux1_x86_64.whl (13.8MB)
+Operation cancelled by user

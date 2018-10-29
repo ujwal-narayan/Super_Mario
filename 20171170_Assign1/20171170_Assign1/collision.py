@@ -126,6 +126,7 @@ def move_maadi(self, board, charac):
         if self.endx > -2:
             if self.killed_by_enms:
                 self.powerup1 = False
+                self.lives = 0
                 reset(self, board, charac)
             else:
                 board.bufferboard[self.x_pos:self.endx, self.y_pos:self.endy] = ""

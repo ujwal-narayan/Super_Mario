@@ -65,15 +65,19 @@ It is also pep8 compliant
 + Fixed missing docstrings
 + Fixed redefinition of types
 + Followed pep8 conventions regarding spaces
++ Fixed import error ( Ensure that .pylintrc can detect the packages)
 
-A few errors were locally disabled. One was too-few-public-class.While understandable that Classes must not be used to store data , often it is the best method to use for your needs as is the case here. Rather than adding few useless public methods which would only result in obsfucating the code , the errors were locally disabled.Another error that was disabled was the import error as you would have to configure the path for the pacakges in pylint correctly.`msvcrt` is needed only for windows and as it is not essential for unix systems it is not mentioned in the requirements. 
+### Bugs Fixed
+
++ Fixed the Falling in pit bug
+
 
 ### Pylint scores
 
-1. board.py : 9.22/10
+1. board.py :  9.63/10 
 2. charec.py : 9.04/10
 3. collision.py : 9.19/10 
 4. color.py : 10/10
-5. config.py : 9.37/10 
+5. config.py : 10.00/10 
 6. input.py : 9.59/10 
 7. main.py : 10/10 

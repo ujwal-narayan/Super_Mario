@@ -10,7 +10,7 @@ import input as myinput
 
 BOARD = b.Board(20, 500, -6, -3, 342, 345, b.ENMS_1, b.OBS1, b.COINSARR)
 MARIO = Mario(-6, -3, 0, 3, BOARD)
-config.LEVEL = 1
+config.LEVEL = 2
 BOARD.player = MARIO
 
 

@@ -1,0 +1,10 @@
+actionid: py35
+msg: getenv
+cmdargs: '/home/badwolf/.virtualenvs/supermario/bin/python3 -m virtualenv --python /home/badwolf/.virtualenvs/supermario/bin/python3 py35'
+
+Already using interpreter /home/badwolf/.virtualenvs/supermario/bin/python3
+Using real prefix '/usr'
+Path not in prefix '/home/badwolf/.virtualenvs/supermario/include/python3.5m' '/usr'
+New python executable in /media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/py35/bin/python3
+Also creating executable in /media/badwolf/Windows/Users/Urja Nadibail/acads/sem3/ssad/Super_Mario/Super_Mario/20171170_Assign1/20171170_Assign1/.tox/py35/bin/python
+Installing setuptools, pip, wheel...done.
