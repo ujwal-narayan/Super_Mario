@@ -1,4 +1,4 @@
-# Super_Mario
+# Super Mario
 CLI version of the Super Marios Game 
 
 ## Instructions
@@ -12,4 +12,6 @@ CLI version of the Super Marios Game
 
 ## Controls
 
-WASD . Space can also be used to jump. Double tap Space to Double Jump .
+- WASD for movement. 
+- Space can also be used to jump.
+- Double tap space to double jump .
